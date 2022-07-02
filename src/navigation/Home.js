@@ -1,9 +1,8 @@
-import { View, Text } from 'react-native';
 import React from 'react';
 import { UserAuth } from '../context/AuthContext';
 import { createStackNavigator } from '@react-navigation/stack';
 import Profile from '../screens/Profile';
-import Main from '../screens/Main';
+import MainNav from './MainNav';
 
 const Stack = createStackNavigator();
 
@@ -13,18 +12,21 @@ export default function Home() {
   return (
     <>
       <Stack.Navigator>
-        {!currUser.displayName && (
+        {currUser.displayName === null ? (
           <Stack.Screen
             name="profile"
             component={Profile}
             options={{ headerShown: false }}
           />
+        ) : (
+          <>
+            <Stack.Screen
+              name="mainNav"
+              component={MainNav}
+              options={{ headerShown: false }}
+            />
+          </>
         )}
-        <Stack.Screen
-          name="home"
-          component={Main}
-          options={{ headerShown: false }}
-        />
       </Stack.Navigator>
     </>
   );
