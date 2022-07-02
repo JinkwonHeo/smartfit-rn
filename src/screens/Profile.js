@@ -67,7 +67,6 @@ export default function Profile() {
     ]);
 
     setLoading(false);
-    navigation.navigate('home');
   };
 
   const handleProfilePicture = async () => {
