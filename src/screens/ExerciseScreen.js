@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Camera } from 'expo-camera';
 import { Video } from 'expo-av';
+import { StatusBar } from 'expo-status-bar';
+import { MaterialIcons } from '@expo/vector-icons';
 
 export default function ExerciseScreen({ route }) {
   const [permissionStatus, setPermissionStatus] = useState('');
   const [type, setType] = useState('front');
-
-  console.log(route);
 
   useEffect(() => {
     (async () => {
@@ -24,6 +24,7 @@ export default function ExerciseScreen({ route }) {
   }
   return (
     <View style={styles.container}>
+      <StatusBar hidden />
       <Video
         style={styles.video}
         resizeMode="contain"
@@ -31,7 +32,7 @@ export default function ExerciseScreen({ route }) {
         isLooping
         source={route.params.videoURI}
       />
-      <Camera style={styles.camera} type={type}>
+      <Camera style={styles.camera} type={type} ratio={'1:1'}>
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             style={styles.button}
@@ -39,7 +40,11 @@ export default function ExerciseScreen({ route }) {
               setType(type === 'back' ? 'front' : 'back');
             }}
           >
-            <Text style={styles.text}> Flip </Text>
+            <MaterialIcons
+              name="flip-camera-android"
+              size={30}
+              color={'white'}
+            />
           </TouchableOpacity>
         </View>
       </Camera>
@@ -52,13 +57,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   video: {
-    flex: 0.9,
+    flex: 0.989,
     width: '100%',
     height: '100%',
   },
   camera: {
     flex: 1,
-    alignSelf: 'auto',
+    width: '100%',
+    height: '100%',
   },
   buttonContainer: {
     flex: 1,
@@ -67,7 +73,7 @@ const styles = StyleSheet.create({
     margin: 20,
   },
   button: {
-    flex: 0.15,
+    flex: 0.1,
     alignSelf: 'flex-start',
     alignItems: 'flex-end',
   },

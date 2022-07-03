@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { View, StyleSheet, Image, FlatList } from 'react-native';
+import { LoadingState } from '../context/LoadingContext';
+import LoadingCircle from '../components/LoadingCircle';
 import * as VideoThumbnails from 'expo-video-thumbnails';
 import { Asset } from 'expo-asset';
 import { ThumbnailState } from '../context/ThumbnailContext';
@@ -26,6 +28,7 @@ export default function HomeScreen() {
     },
   ];
 
+  const { loading, setLoading } = LoadingState();
   const { thumbNails, setThumbNails } = ThumbnailState();
   const navigation = useNavigation();
 
@@ -64,45 +67,46 @@ export default function HomeScreen() {
     generateThumbnails();
   }, []);
 
+  useEffect(() => {
+    if (!thumbNails.length) {
+      setLoading(true);
+    } else {
+      setLoading(false);
+    }
+  }, [thumbNails.length]);
+
   const renderThumbnail = ({ item }) => (
-    <View
-      style={{
-        flexDirection: 'row',
-        justifyContent: 'center',
-        marginBottom: 25,
-      }}
-    >
+    <View style={styles.thumbNailItem}>
       <TouchableOpacity
         onPress={() =>
           navigation.navigate('exerciseScreen', { videoURI: item.videoURI })
         }
       >
-        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-          <Image
-            source={{ uri: item.uri }}
-            style={{
-              width: 380,
-              height: 200,
-              borderRadius: 10,
-              borderColor: 'black',
-              borderWidth: 1,
-            }}
-          />
+        <View style={styles.imageWrapper}>
+          <Image source={{ uri: item.uri }} style={styles.image} />
         </View>
       </TouchableOpacity>
     </View>
   );
 
   return (
-    <View style={styles.container}>
-      <FlatList
-        data={thumbNails}
-        renderItem={renderThumbnail}
-        keyExtractor={(thumbNail) => thumbNail.id}
-        numColumns={1}
-        style={{ marginTop: 50 }}
-      />
-    </View>
+    <>
+      {loading ? (
+        <View style={styles.container}>
+          <LoadingCircle />
+        </View>
+      ) : (
+        <View style={styles.container}>
+          <FlatList
+            data={thumbNails}
+            renderItem={renderThumbnail}
+            keyExtractor={(thumbNail) => thumbNail.id}
+            numColumns={1}
+            style={{ marginTop: 50 }}
+          />
+        </View>
+      )}
+    </>
   );
 }
 
@@ -113,8 +117,20 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#fff',
   },
+  imageWrapper: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   image: {
-    width: 200,
+    width: 380,
     height: 200,
+    borderRadius: 10,
+    borderColor: 'black',
+    borderWidth: 1,
+  },
+  thumbNailItem: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginBottom: 25,
   },
 });
