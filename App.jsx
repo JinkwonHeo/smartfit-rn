@@ -3,6 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { LogBox } from 'react-native';
 import { AuthContextProvider } from './src/context/AuthContext';
 import { LoadingContextProvider } from './src/context/LoadingContext';
+import { ThumbnailContextProvider } from './src/context/ThumbnailContext';
 import { theme } from './theme';
 import NavigationIndex from './src/navigation/index';
 
@@ -15,8 +16,10 @@ function App() {
   return (
     <AuthContextProvider>
       <LoadingContextProvider>
-        <StatusBar backgroundColor={theme.colors.foreground} />
-        <NavigationIndex />
+        <ThumbnailContextProvider>
+          <StatusBar backgroundColor={theme.colors.foreground} />
+          <NavigationIndex />
+        </ThumbnailContextProvider>
       </LoadingContextProvider>
     </AuthContextProvider>
   );

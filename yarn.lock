@@ -3255,6 +3255,17 @@ expo-application@~4.0.0:
   resolved "https://registry.yarnpkg.com/expo-application/-/expo-application-4.0.2.tgz#860dbd12132a56de7cf75fe7b5146b6cd97ed30e"
   integrity sha512-ngTaFplTkWn0X45gMC+VNXGyJfGxX4wOwKmtr17rNMVWOQUhhLlyMkTj9bAamzsuwZh35l3S/eD/N1aMWWUwMw==
 
+expo-asset@^8.5.0:
+  version "8.5.0"
+  resolved "https://registry.yarnpkg.com/expo-asset/-/expo-asset-8.5.0.tgz#d83ed8e42f1aa3d74aeca67b87c90e17f1661b0f"
+  integrity sha512-k3QErZYxb6e6rPkJ1sG5yIJ7bhd4RFvnFStz0ZCO6SfktGygBAjTz5aTOLaaomiCIObRiBQ4byky/RLdli/NLw==
+  dependencies:
+    blueimp-md5 "^2.10.0"
+    invariant "^2.2.4"
+    md5-file "^3.2.3"
+    path-browserify "^1.0.0"
+    url-parse "^1.5.9"
+
 expo-asset@~8.4.3:
   version "8.4.6"
   resolved "https://registry.yarnpkg.com/expo-asset/-/expo-asset-8.4.6.tgz#1c40e9badac66dbd3d2be2810711937e5b9b09bd"
@@ -3362,6 +3373,11 @@ expo-status-bar@~1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/expo-status-bar/-/expo-status-bar-1.2.0.tgz#16e73205da563f9536f562e439081e30e318a82e"
   integrity sha512-pVZZ/kDCXFK79E4dCtRecs3XLC8aiwlciutSd/fFmUPJSQZ1Txia6hlKajPt0GAYft8/YnT0V3URXzWZOBniYQ==
+
+expo-video-thumbnails@^6.3.0:
+  version "6.3.0"
+  resolved "https://registry.yarnpkg.com/expo-video-thumbnails/-/expo-video-thumbnails-6.3.0.tgz#07daa798ad175242fef4e62c8f2040b11606a41b"
+  integrity sha512-oVy9XlzNxnpXFDz3FiWOrMOBWmYtZrNYnXc3XaVyj8ayRqwDNvW4P95kQeUhB04uwaMDOm4vIxc5SQxDAyxPGg==
 
 expo@43.0.0:
   version "43.0.0"
@@ -6559,7 +6575,7 @@ urix@^0.1.0:
   resolved "https://registry.yarnpkg.com/urix/-/urix-0.1.0.tgz#da937f7a62e21fec1fd18d49b35c2935067a6c72"
   integrity sha1-2pN/emLiH+wf0Y1Js1wpNQZ6bHI=
 
-url-parse@^1.4.4:
+url-parse@^1.4.4, url-parse@^1.5.9:
   version "1.5.10"
   resolved "https://registry.yarnpkg.com/url-parse/-/url-parse-1.5.10.tgz#9d3c2f736c1d75dd3bd2be507dcc111f1e2ea9c1"
   integrity sha512-WypcfiRhfeUP9vvF0j6rw0J3hrWrw6iZv3+22h6iRMJ/8z1Tj6XfLP4DsUix5MhMPnXpiHDoKyoZ/bdCkwBCiQ==
