@@ -3,9 +3,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Feather, MaterialCommunityIcons, Entypo } from '@expo/vector-icons';
 import HomeScreen from '../screens/HomeScreen';
 import Trainers from '../screens/Trainers';
-import VideoScreen from '../screens/VideoScreen';
 import EtcScreen from '../screens/EtcScreen';
 import FaceDetect from '../screens/FaceDetect';
+import RecordScreen from '../screens/RecordScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -45,7 +45,7 @@ export default function MainNav() {
       />
       <Tab.Screen
         name="Record"
-        component={VideoScreen}
+        component={RecordScreen}
         options={{
           tabBarIcon: ({ color }) => (
             <Feather name="video" size={24} color={color} />

@@ -1,10 +1,10 @@
 import { View, Text } from 'react-native';
 import React from 'react';
 
-export default function VideoScreen() {
+export default function RecordScreen() {
   return (
     <View style={{ marginTop: 40 }}>
-      <Text>VideoScreen</Text>
+      <Text>RecordScreen</Text>
     </View>
   );
 }
