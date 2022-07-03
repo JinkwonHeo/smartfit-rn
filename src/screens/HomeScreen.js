@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
-import { View, Text, StyleSheet, Image, FlatList } from 'react-native';
+import { View, StyleSheet, Image, FlatList } from 'react-native';
 import * as VideoThumbnails from 'expo-video-thumbnails';
 import { Asset } from 'expo-asset';
 import { ThumbnailState } from '../context/ThumbnailContext';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
 
 export default function HomeScreen() {
   const videos = [
@@ -26,6 +27,7 @@ export default function HomeScreen() {
   ];
 
   const { thumbNails, setThumbNails } = ThumbnailState();
+  const navigation = useNavigation();
 
   useEffect(() => {
     const generateThumbnails = async () => {
@@ -44,6 +46,7 @@ export default function HomeScreen() {
           const item = {
             id: index,
             uri: uri,
+            videoURI: element.src,
           };
           thumbNailTemp.push(item);
 
@@ -69,7 +72,11 @@ export default function HomeScreen() {
         marginBottom: 25,
       }}
     >
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate('exerciseScreen', { videoURI: item.videoURI })
+        }
+      >
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
           <Image
             source={{ uri: item.uri }}
@@ -88,16 +95,6 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
-      {/* <Video
-        style={styles.video}
-        resizeMode="contain"
-        useNativeControls
-        isLooping
-        source={videos[2].src}
-      /> */}
-      {/* {thumbNails && (
-        <Image source={{ uri: thumbNails }} style={styles.image} />
-      )} */}
       <FlatList
         data={thumbNails}
         renderItem={renderThumbnail}
@@ -115,13 +112,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#fff',
-  },
-  video: {
-    flex: 1,
-    alignSelf: 'stretch',
-  },
-  buttons: {
-    margin: 16,
   },
   image: {
     width: 200,
