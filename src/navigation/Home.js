@@ -1,10 +1,12 @@
 import React from 'react';
 import { UserAuth } from '../context/AuthContext';
 import { createStackNavigator } from '@react-navigation/stack';
+
 import Profile from '../screens/Profile';
+import ExerciseScreen from '../screens/ExerciseScreen';
 import MainNav from './MainNav';
 import Face from '../components/Face';
-import ExerciseScreen from '../screens/ExerciseScreen';
+import Pose from '../components/Pose';
 
 const Stack = createStackNavigator();
 
@@ -31,6 +33,11 @@ export default function Home() {
               name="face"
               component={Face}
               // options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="pose"
+              component={Pose}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="exerciseScreen"

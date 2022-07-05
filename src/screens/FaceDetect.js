@@ -1,4 +1,4 @@
-import { View, Text, Button } from 'react-native';
+import { View, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { theme } from '../../theme';
@@ -18,8 +18,13 @@ export default function FaceDetect() {
       }}
     >
       <Button
-        title="go to detect"
+        title="Face detect"
         onPress={() => navigation.navigate('face')}
+        color={colors.secondary}
+      />
+      <Button
+        title="Pose detect"
+        onPress={() => navigation.navigate('pose')}
         color={colors.secondary}
       />
     </View>
