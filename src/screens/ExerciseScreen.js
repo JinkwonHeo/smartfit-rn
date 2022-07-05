@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { Camera } from 'expo-camera';
 import { Video } from 'expo-av';
 import { StatusBar } from 'expo-status-bar';
-import { MaterialIcons } from '@expo/vector-icons';
+import Pose from '../components/Pose';
 
 export default function ExerciseScreen({ route }) {
   const [permissionStatus, setPermissionStatus] = useState('');
-  const [type, setType] = useState('front');
 
   useEffect(() => {
     (async () => {
@@ -32,22 +31,9 @@ export default function ExerciseScreen({ route }) {
         isLooping
         source={route.params.videoURI}
       />
-      <Camera style={styles.camera} type={type} ratio={'1:1'}>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              setType(type === 'back' ? 'front' : 'back');
-            }}
-          >
-            <MaterialIcons
-              name="flip-camera-android"
-              size={30}
-              color={'white'}
-            />
-          </TouchableOpacity>
-        </View>
-      </Camera>
+      <View style={styles.camera}>
+        <Pose />
+      </View>
     </View>
   );
 }
