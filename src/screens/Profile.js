@@ -11,11 +11,10 @@ import { StatusBar } from 'expo-status-bar';
 import Constants from 'expo-constants';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { TextInput } from 'react-native-gesture-handler';
-import { pickImage, askForPermission, uploadImage } from '../../utils';
-import { auth, db } from '../../firebase';
+import { pickImage, askForPermission, uploadImage } from '../utils/utils';
+import { auth, db } from '../utils/firebase';
 import { updateProfile } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
-import { useNavigation } from '@react-navigation/native';
 import { LoadingState } from '../context/LoadingContext';
 import LoadingCircle from '../components/LoadingCircle';
 import { theme } from '../../theme';
@@ -28,8 +27,7 @@ export default function Profile() {
   const [displayName, setDisplayName] = useState('');
   const [selectedImage, setSelectedImage] = useState(DEFAULT_PHOTO);
   const [permissionStatus, setPermissionStatus] = useState('');
-  const { setLoading } = LoadingState();
-  const navigation = useNavigation();
+  const { loading, setLoading } = LoadingState();
 
   useEffect(() => {
     (async () => {
@@ -118,6 +116,7 @@ export default function Profile() {
           onChangeText={setDisplayName}
           style={styles.namePlaceholder}
         />
+        {loading && <LoadingCircle />}
         <View style={styles.buttonWrapper}>
           <Button
             title="Next"

@@ -1,7 +1,7 @@
 import { View, Text, Button, StyleSheet } from 'react-native';
 import React from 'react';
 import { UserAuth } from '../context/AuthContext';
-import { auth } from '../../firebase';
+import { auth } from '../utils/firebase';
 import { signOut } from 'firebase/auth';
 import { theme } from '../../theme';
 

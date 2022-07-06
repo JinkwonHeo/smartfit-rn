@@ -8,12 +8,12 @@ import {
   StyleSheet,
 } from 'react-native';
 import React, { useState, useEffect, useRef } from 'react';
-import { signUp } from '../../firebase';
+import { signUp } from '../utils/firebase';
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../../firebase';
+import { auth } from '../utils/firebase';
 import { UserAuth } from '../context/AuthContext';
 import { theme } from '../../theme';
-import { validateEmail } from '../../utils';
+import { validateEmail } from '../utils/utils';
 import ErrorMessage from '../components/ErrorMessage';
 
 const colors = theme.colors;
