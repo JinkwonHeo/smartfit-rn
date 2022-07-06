@@ -1,20 +1,26 @@
 import React, { createRef, useEffect, useState } from 'react';
-import { Button, Platform, StyleSheet, View } from 'react-native';
+import { Button, Platform, StyleSheet, View, Text } from 'react-native';
+import * as FileSystem from 'expo-file-system';
 import { Camera } from 'expo-camera';
-import { cameraWithTensors } from '@tensorflow/tfjs-react-native';
+import { MaterialIcons } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
-import { MaterialIcons } from '@expo/vector-icons';
 
 import * as tf from '@tensorflow/tfjs';
 import * as poseNet from '@tensorflow-models/posenet';
+import { cameraWithTensors } from '@tensorflow/tfjs-react-native';
 
-import { renderPose } from '../../poseUtils';
+import { PermissionState } from '../context/PermissionContext';
+import { ExerciseDataState } from '../context/ExerciseDataContext';
 
-const CAMERA_SIZE = { height: 400, width: 400 };
+import { renderPose, getAngle } from '../utils/poseUtils';
+import useBasicExercise from '../hooks/useBasicExercise';
+import { CAMERA_SIZE } from '../constants/size';
+
 const TensorCamera = cameraWithTensors(Camera);
+const { StorageAccessFramework } = FileSystem;
 
-function Pose() {
+function Pose({ exerciseName }) {
   const [initSetting, setInitSetting] = useState({
     isTfReady: false,
     poseNetModel: null,
@@ -22,8 +28,11 @@ function Pose() {
   const [isScreenTouched, setIsScreenTouched] = useState(false);
   const [type, setType] = useState(Camera.Constants.Type.front);
   const [pose, setPose] = useState(null);
-  const navigation = useNavigation();
+  const [rep] = useBasicExercise(pose, exerciseName);
   const tensorCameraRef = createRef();
+  const { permission } = PermissionState();
+  const { exerciseData, setExerciseData } = ExerciseDataState();
+  const navigation = useNavigation();
 
   const textureDims =
     Platform.OS === 'ios'
@@ -32,11 +41,11 @@ function Pose() {
 
   useEffect(() => {
     (async () => {
-      await fn_initSetting();
+      await initialSetting();
     })();
   }, []);
 
-  const fn_initSetting = async () => {
+  const initialSetting = async () => {
     let _isTensorReady = false;
     let _poseNet = null;
 
@@ -84,8 +93,40 @@ function Pose() {
         );
 
         if (_predictions) {
-          // console.log(_predictions.keypoints);
           setPose(_predictions);
+
+          if (_predictions.score > 0.85) {
+            setExerciseData((prev) => prev.concat(_predictions));
+          }
+
+          const exerciseFile = JSON.stringify(exerciseData);
+
+          const saveFile = async () => {
+            if (permission.granted) {
+              const directoryUri = permission.directoryUri;
+              const data = exerciseFile;
+              await StorageAccessFramework.createFileAsync(
+                directoryUri,
+                'exercise.json',
+                'application/json'
+              )
+                .then(async (fileUri) => {
+                  console.log('file saved');
+                  await FileSystem.writeAsStringAsync(fileUri, data, {
+                    encoding: FileSystem.EncodingType.UTF8,
+                  });
+                })
+                .catch((e) => {
+                  console.log(e);
+                });
+            } else {
+              alert('you must allow permission to save.');
+            }
+          };
+
+          if (exerciseData.length > 20) {
+            // saveFile();
+          }
 
           if (_predictions.score > 0.3) {
             _isEstimate = true;
@@ -133,6 +174,12 @@ function Pose() {
     return () => clearTimeout();
   }, [isScreenTouched]);
 
+  useEffect(() => {
+    if (rep === 10) {
+      navigation.goBack();
+    }
+  }, [rep]);
+
   return (
     <>
       <View style={styles.container} onTouchEnd={handleScreenTouched}>
@@ -150,7 +197,7 @@ function Pose() {
               autorender={true}
               useCustomShadersToResize={false}
               onReady={fn_onReadyTensorCamera}
-              ratio={'1:1'}
+              ratio={'16:9'}
             />
             <View style={styles.buttonContainer}>
               <TouchableOpacity
@@ -175,7 +222,15 @@ function Pose() {
                 <Button title="End" onPress={handleExit} color={'#518cad'} />
               </View>
             )}
-            <View style={styles.modelResults}>{renderPose(pose)}</View>
+
+            <View style={styles.modelResults}>{renderPose(pose, rep)}</View>
+            {pose && (
+              <View style={styles.scoreTextContainer}>
+                <Text style={styles.scoreText} key={`item-0`}>
+                  {getAngle(pose, 'rightElbow')}
+                </Text>
+              </View>
+            )}
           </>
         )}
       </View>
@@ -194,8 +249,8 @@ const styles = StyleSheet.create({
   },
   camera: {
     position: 'absolute',
-    width: '100%',
-    height: '100%',
+    width: CAMERA_SIZE.width,
+    height: CAMERA_SIZE.height,
   },
   prevButtonWrapper: {
     flex: 0.1,
@@ -216,8 +271,21 @@ const styles = StyleSheet.create({
   },
   modelResults: {
     position: 'absolute',
-    width: '100%',
-    height: '100%',
+    width: CAMERA_SIZE.width,
+    height: CAMERA_SIZE.height,
     zIndex: 12,
+  },
+  scoreTextContainer: {
+    zIndex: 11,
+    position: 'absolute',
+    bottom: 10,
+    backgroundColor: 'rgba(0,0,0,0.1)',
+    padding: 8,
+    borderRadius: 20,
+    alignItems: 'center',
+  },
+  scoreText: {
+    paddingVertical: 2,
+    fontSize: 90,
   },
 });

@@ -4,6 +4,8 @@ import { LogBox } from 'react-native';
 import { AuthContextProvider } from './src/context/AuthContext';
 import { LoadingContextProvider } from './src/context/LoadingContext';
 import { ThumbnailContextProvider } from './src/context/ThumbnailContext';
+import { PermissionContextProvider } from './src/context/PermissionContext';
+import { ExerciseDataContextProvider } from './src/context/ExerciseDataContext';
 import { theme } from './theme';
 import NavigationIndex from './src/navigation/index';
 
@@ -17,8 +19,12 @@ function App() {
     <AuthContextProvider>
       <LoadingContextProvider>
         <ThumbnailContextProvider>
-          <StatusBar backgroundColor={theme.colors.foreground} />
-          <NavigationIndex />
+          <PermissionContextProvider>
+            <ExerciseDataContextProvider>
+              <StatusBar backgroundColor={theme.colors.foreground} />
+              <NavigationIndex />
+            </ExerciseDataContextProvider>
+          </PermissionContextProvider>
         </ThumbnailContextProvider>
       </LoadingContextProvider>
     </AuthContextProvider>

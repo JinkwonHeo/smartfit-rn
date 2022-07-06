@@ -27,6 +27,7 @@ export default function HomeScreen() {
       src: require('../../assets/videos/4.mp4'),
     },
   ];
+  const exerciseList = ['squat', 'pushUp', 'lunge', 'dumbbellCurl'];
 
   const { loading, setLoading } = LoadingState();
   const { thumbNails, setThumbNails } = ThumbnailState();
@@ -50,6 +51,7 @@ export default function HomeScreen() {
             id: index,
             uri: uri,
             videoURI: element.src,
+            exercise: exerciseList[index - 1],
           };
           thumbNailTemp.push(item);
 
@@ -79,7 +81,10 @@ export default function HomeScreen() {
     <View style={styles.thumbNailItem}>
       <TouchableOpacity
         onPress={() =>
-          navigation.navigate('exerciseScreen', { videoURI: item.videoURI })
+          navigation.navigate('exerciseScreen', {
+            videoURI: item.videoURI,
+            exercise: item.exercise,
+          })
         }
       >
         <View style={styles.imageWrapper}>
