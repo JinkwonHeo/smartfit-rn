@@ -18,9 +18,11 @@ export default function ExerciseScreen({ route }) {
   if (permissionStatus === '') {
     return <View />;
   }
+
   if (permissionStatus === false) {
     return <Text>No access to camera</Text>;
   }
+
   return (
     <View style={styles.container}>
       <StatusBar hidden />
@@ -32,7 +34,7 @@ export default function ExerciseScreen({ route }) {
         source={route.params.videoURI}
       />
       <View style={styles.camera}>
-        <Pose />
+        <Pose exerciseName={route.params.exercise} />
       </View>
     </View>
   );
@@ -52,19 +54,8 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-  buttonContainer: {
-    flex: 1,
-    backgroundColor: 'transparent',
-    flexDirection: 'row',
-    margin: 20,
-  },
-  button: {
-    flex: 0.1,
-    alignSelf: 'flex-start',
-    alignItems: 'flex-end',
-  },
   text: {
-    fontSize: 25,
+    fontSize: 20,
     fontWeight: 'bold',
     color: 'white',
   },
