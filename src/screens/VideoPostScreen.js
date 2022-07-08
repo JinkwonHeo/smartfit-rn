@@ -81,7 +81,7 @@ export default function VideoPostScreen({ route, navigation }) {
           {loading ? (
             <LoadingCircle />
           ) : (
-            <AntDesign name="check" style={styles.uploadIcon} />
+            <AntDesign name="cloudupload" style={styles.uploadIcon} />
           )}
         </TouchableOpacity>
       </View>
@@ -96,7 +96,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   header: {
-    height: '9%',
+    marginTop: 20,
+    height: '10%',
     flexDirection: 'row',
   },
   backButton: {
@@ -135,6 +136,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
   uploadIcon: {
+    marginTop: 20,
     fontSize: 38,
     color: '#2196F3',
   },
