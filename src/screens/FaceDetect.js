@@ -1,23 +1,10 @@
 import { View, Button } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import React, { useEffect, useState } from 'react';
-import * as FileSystem from 'expo-file-system';
-import { PermissionState } from '../context/PermissionContext';
+import React from 'react';
 import { theme } from '../../theme';
 
 const colors = theme.colors;
 
-export default function FaceDetect() {
-  const { permission, setPermission } = PermissionState();
-  const { StorageAccessFramework } = FileSystem;
-  const navigation = useNavigation();
-
-  useEffect(async () => {
-    const permissions =
-      await StorageAccessFramework.requestDirectoryPermissionsAsync();
-    setPermission(permissions);
-  }, []);
-
+export default function FaceDetect({ navigation }) {
   return (
     <View
       style={{
