@@ -7,6 +7,9 @@ import ExerciseScreen from '../screens/ExerciseScreen';
 import MainNav from './MainNav';
 import Face from '../components/Face';
 import Pose from '../components/Pose';
+import RecordResultScreen from '../screens/RecordResultScreen';
+import Record from '../components/Record';
+import VideoPostScreen from '../screens/VideoPostScreen';
 
 const Stack = createStackNavigator();
 
@@ -37,6 +40,21 @@ export default function Home() {
             <Stack.Screen
               name="pose"
               component={Pose}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="record"
+              component={Record}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="recordResult"
+              component={RecordResultScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="videoPost"
+              component={VideoPostScreen}
               options={{ headerShown: false }}
             />
             <Stack.Screen
