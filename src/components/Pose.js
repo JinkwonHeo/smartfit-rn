@@ -1,24 +1,21 @@
 import React, { createRef, useEffect, useState } from 'react';
 import { Button, Platform, StyleSheet, View, Text } from 'react-native';
-import * as FileSystem from 'expo-file-system';
 import { Camera } from 'expo-camera';
 import { MaterialIcons } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 
 import * as tf from '@tensorflow/tfjs';
+import '@tensorflow/tfjs-backend-webgl';
 import * as poseNet from '@tensorflow-models/posenet';
 import { cameraWithTensors } from '@tensorflow/tfjs-react-native';
 
-import { PermissionState } from '../context/PermissionContext';
 import { ExerciseDataState } from '../context/ExerciseDataContext';
-
 import { renderPose, getAngle } from '../utils/poseUtils';
 import useBasicExercise from '../hooks/useBasicExercise';
 import { CAMERA_SIZE } from '../constants/size';
 
 const TensorCamera = cameraWithTensors(Camera);
-const { StorageAccessFramework } = FileSystem;
 
 function Pose({ exerciseName }) {
   const [initSetting, setInitSetting] = useState({
@@ -30,7 +27,6 @@ function Pose({ exerciseName }) {
   const [pose, setPose] = useState(null);
   const [rep] = useBasicExercise(pose, exerciseName);
   const tensorCameraRef = createRef();
-  const { permission } = PermissionState();
   const { exerciseData, setExerciseData } = ExerciseDataState();
   const navigation = useNavigation();
 
@@ -82,7 +78,7 @@ function Pose({ exerciseName }) {
     });
   };
 
-  const fn_estimatePoseNet = async (tensorImage) => {
+  const estimatePoseNet = async (tensorImage) => {
     let _isEstimate = false;
 
     try {
@@ -97,35 +93,6 @@ function Pose({ exerciseName }) {
 
           if (_predictions.score > 0.85) {
             setExerciseData((prev) => prev.concat(_predictions));
-          }
-
-          const exerciseFile = JSON.stringify(exerciseData);
-
-          const saveFile = async () => {
-            if (permission.granted) {
-              const directoryUri = permission.directoryUri;
-              const data = exerciseFile;
-              await StorageAccessFramework.createFileAsync(
-                directoryUri,
-                'exercise.json',
-                'application/json'
-              )
-                .then(async (fileUri) => {
-                  console.log('file saved');
-                  await FileSystem.writeAsStringAsync(fileUri, data, {
-                    encoding: FileSystem.EncodingType.UTF8,
-                  });
-                })
-                .catch((e) => {
-                  console.log(e);
-                });
-            } else {
-              alert('you must allow permission to save.');
-            }
-          };
-
-          if (exerciseData.length > 20) {
-            // saveFile();
           }
 
           if (_predictions.score > 0.3) {
@@ -145,11 +112,11 @@ function Pose({ exerciseName }) {
     return _isEstimate;
   };
 
-  const fn_onReadyTensorCamera = (images) => {
+  const onReadyTensorCamera = (images) => {
     const loop = async () => {
       const _tensorImage = images.next().value;
 
-      await fn_estimatePoseNet(_tensorImage);
+      await estimatePoseNet(_tensorImage);
 
       if (_tensorImage === undefined) return;
       _tensorImage.dispose();
@@ -160,6 +127,7 @@ function Pose({ exerciseName }) {
   };
 
   const handleExit = () => {
+    setIsScreenTouched(false);
     navigation.goBack();
   };
 
@@ -196,7 +164,7 @@ function Pose({ exerciseName }) {
               resizeDepth={3}
               autorender={true}
               useCustomShadersToResize={false}
-              onReady={fn_onReadyTensorCamera}
+              onReady={onReadyTensorCamera}
               ratio={'16:9'}
             />
             <View style={styles.buttonContainer}>

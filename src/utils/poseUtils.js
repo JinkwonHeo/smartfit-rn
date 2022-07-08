@@ -112,4 +112,27 @@ export const getAngle = (poseData, targetName) => {
   }
 };
 
+export const saveFile = async () => {
+  if (permission.granted) {
+    const directoryUri = permission.directoryUri;
+    const data = exerciseFile;
+    await StorageAccessFramework.createFileAsync(
+      directoryUri,
+      'exercise.json',
+      'application/json'
+    )
+      .then(async (fileUri) => {
+        console.log('file saved');
+        await FileSystem.writeAsStringAsync(fileUri, data, {
+          encoding: FileSystem.EncodingType.UTF8,
+        });
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  } else {
+    alert('you must allow permission to save.');
+  }
+};
+
 export const keypoints = () => {};

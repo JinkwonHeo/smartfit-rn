@@ -9,6 +9,7 @@ import {
 import React, { useContext, useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import Constants from 'expo-constants';
+import { Asset } from 'expo-asset';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { TextInput } from 'react-native-gesture-handler';
 import { pickImage, askForPermission, uploadImage } from '../utils/utils';
@@ -20,8 +21,7 @@ import LoadingCircle from '../components/LoadingCircle';
 import { theme } from '../../theme';
 
 const colors = theme.colors;
-const DEFAULT_PHOTO =
-  'https://firebasestorage.googleapis.com/v0/b/smartfit-ef7ee.appspot.com/o/face.png?alt=media&token=ff605d61-be51-4b06-a84d-a09445fc138b';
+const DEFAULT_PHOTO = Asset.fromModule(require('../../assets/face.png')).uri;
 
 export default function Profile() {
   const [displayName, setDisplayName] = useState('');
@@ -30,6 +30,7 @@ export default function Profile() {
   const { loading, setLoading } = LoadingState();
 
   useEffect(() => {
+    setLoading(false);
     (async () => {
       const status = await askForPermission();
       setPermissionStatus(status);
