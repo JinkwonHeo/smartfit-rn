@@ -50,6 +50,33 @@ export const uploadImage = async (uri, path, fName) => {
   return { url, fileName };
 };
 
+export const uploadVideo = async (uri, path, fName) => {
+  const blob = await new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+      resolve(xhr.response);
+    };
+    xhr.onerror = function (e) {
+      console.log(e);
+      reject(new TypeError('Network request failed'));
+    };
+    xhr.responseType = 'blob';
+    xhr.open('GET', uri, true);
+    xhr.send(null);
+  });
+
+  const fileName = fName || nanoid();
+  const videoRef = ref(storage, `${path}/${fileName}.mp4`);
+
+  const snapshot = await uploadBytes(videoRef, blob);
+
+  blob.close();
+
+  const uploadedURL = await getDownloadURL(snapshot.ref);
+
+  return { uploadedURL, fileName };
+};
+
 export const validateEmail = (email) => {
   const emailValidation =
     /^[0-9?A-z0-9?]+(\.)?[0-9?A-z0-9?]+@[0-9?A-z]+\.[A-z]{2}.?[A-z]{0,3}$/;
