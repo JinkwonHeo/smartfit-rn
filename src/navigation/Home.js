@@ -10,6 +10,8 @@ import Pose from '../components/Pose';
 import RecordResultScreen from '../screens/RecordResultScreen';
 import Record from '../components/Record';
 import VideoPostScreen from '../screens/VideoPostScreen';
+import TrainerExerciseListScreen from '../screens/TrainerExerciseListScreen';
+import TrainerExerciseScreen from '../screens/TrainerExerciseScreen';
 
 const Stack = createStackNavigator();
 
@@ -60,6 +62,16 @@ export default function Home() {
             <Stack.Screen
               name="exerciseScreen"
               component={ExerciseScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="trainerExerciseList"
+              component={TrainerExerciseListScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="trainerExerciseScreen"
+              component={TrainerExerciseScreen}
               options={{ headerShown: false }}
             />
           </>
