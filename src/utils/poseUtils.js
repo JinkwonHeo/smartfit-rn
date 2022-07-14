@@ -67,12 +67,12 @@ export const renderPose = (pose, rep) => {
         {keypoints}
         <svgComponents.Text
           stroke="black"
-          strokeWidth="1"
-          fill="black"
-          fontSize="40"
+          strokeWidth="2"
+          fill="white"
+          fontSize="45"
           fontWeight="bold"
-          x="80"
-          y="30"
+          x="300"
+          y="58"
           textAnchor="middle"
         >
           Rep:{rep}
@@ -112,27 +112,54 @@ export const getAngle = (poseData, targetName) => {
   }
 };
 
-export const saveFile = async () => {
-  if (permission.granted) {
-    const directoryUri = permission.directoryUri;
-    const data = exerciseFile;
-    await StorageAccessFramework.createFileAsync(
-      directoryUri,
-      'exercise.json',
-      'application/json'
-    )
-      .then(async (fileUri) => {
-        console.log('file saved');
-        await FileSystem.writeAsStringAsync(fileUri, data, {
-          encoding: FileSystem.EncodingType.UTF8,
-        });
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  } else {
-    alert('you must allow permission to save.');
-  }
+export const poseSimilarity = (pose1, pose2) => {
+  const poseVector1 = getPoseVector(pose1);
+  const poseVector2 = getPoseVector(pose2);
+
+  return cosineDistanceMatching(poseVector1, poseVector2);
 };
 
-export const keypoints = () => {};
+function getPoseVector(pose) {
+  const vector = [];
+
+  const xPos = pose.keypoints.map((k) => k.position.x);
+  const yPos = pose.keypoints.map((k) => k.position.y);
+
+  let minX = Math.min(...xPos);
+  let minY = Math.min(...yPos);
+
+  for (let i = 0; i < xPos.length; i++) {
+    // vector.push(xPos[i] - minX);
+    // vector.push(yPos[i] - minY);
+    vector.push(xPos[i]);
+    vector.push(yPos[i]);
+  }
+
+  return vector;
+}
+
+function cosineDistanceMatching(poseVector1, poseVector2) {
+  const cosineSimilarity = calculateSimilarity(poseVector1, poseVector2);
+  const distance = 2 * (1 - cosineSimilarity);
+
+  return Math.sqrt(distance);
+}
+
+function calculateSimilarity(poseVector1, poseVector2) {
+  let dotProduct = 0;
+  let subPoseVector1 = 0;
+  let subPoseVector2 = 0;
+
+  for (let i = 0; i < poseVector1.length; i++) {
+    dotProduct += poseVector1[i] * poseVector2[i];
+    subPoseVector1 += poseVector1[i] * poseVector1[i];
+    subPoseVector2 += poseVector2[i] * poseVector2[i];
+  }
+
+  subPoseVector1 = Math.sqrt(subPoseVector1);
+  subPoseVector2 = Math.sqrt(subPoseVector2);
+
+  const similarity = dotProduct / (subPoseVector1 * subPoseVector2);
+
+  return similarity;
+}
