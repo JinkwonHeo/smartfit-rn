@@ -6,12 +6,13 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
+  ToastAndroid,
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
+import axios from 'axios';
 
-import { doc, updateDoc, arrayUnion } from 'firebase/firestore';
-import { auth, db } from '../utils/firebase';
-import { uploadVideo } from '../utils/utils';
+import { auth } from '../utils/firebase';
+import { uploadImage, uploadVideo } from '../utils/utils';
 
 import { LoadingState } from '../context/LoadingContext';
 import LoadingCircle from '../components/LoadingCircle';
@@ -20,17 +21,21 @@ export default function VideoPostScreen({ route, navigation }) {
   const [exerciseTitle, setExerciseTitle] = useState('');
   const [titleError, setTitleError] = useState('');
   const { loading, setLoading } = LoadingState();
-  const { uri, thumbnail, token } = route.params;
+  const { uri, thumbNail, token } = route.params;
 
   const handlePost = async () => {
     if (exerciseTitle === '') {
       setTitleError('Exercise name required.');
+
       return;
     }
 
     setLoading(true);
+
     const user = auth.currentUser;
     let videoURL;
+    let videoFileName;
+    let thumbnailURL;
 
     if (uri) {
       const { uploadedURL, fileName } = await uploadVideo(
@@ -38,16 +43,46 @@ export default function VideoPostScreen({ route, navigation }) {
         `videos/${user.uid}`,
         `${exerciseTitle}`
       );
+      const { url } = await uploadImage(
+        thumbNail,
+        `images/${user.uid}`,
+        `${exerciseTitle}`
+      );
       videoURL = uploadedURL;
+      videoFileName = fileName;
+      thumbnailURL = url;
+
+      if (url) {
+        ToastAndroid.show(
+          'Upload success! \n ...tensorflow processing...',
+          ToastAndroid.LONG
+        );
+      }
     }
 
-    const videoData = {
-      videos: arrayUnion(...[{ title: exerciseTitle, url: videoURL }]),
+    const uploadToFireStore = async () => {
+      const result = await axios.post(
+        `${process.env.SERVER_URL}/api/tensorflows/posenet`,
+        {
+          user: auth.currentUser.uid,
+          url: videoURL,
+          fileName: videoFileName,
+          thumbnail: thumbnailURL,
+        }
+      );
+
+      if (result) {
+        ToastAndroid.showWithGravityAndOffset(
+          'Video analyze complete!',
+          ToastAndroid.LONG,
+          ToastAndroid.BOTTOM,
+          25,
+          50
+        );
+      }
     };
 
-    await Promise.all([
-      updateDoc(doc(db, 'users', user.uid), { ...videoData }),
-    ]);
+    uploadToFireStore();
 
     setLoading(false);
     navigation.navigate('mainNav');
@@ -79,7 +114,9 @@ export default function VideoPostScreen({ route, navigation }) {
       <View style={styles.buttonContainer}>
         <TouchableOpacity onPress={handlePost}>
           {loading ? (
-            <LoadingCircle />
+            <View style={styles.loadingCircle}>
+              <LoadingCircle />
+            </View>
           ) : (
             <AntDesign name="cloudupload" style={styles.uploadIcon} />
           )}
@@ -139,6 +176,10 @@ const styles = StyleSheet.create({
     marginTop: 20,
     fontSize: 38,
     color: '#2196F3',
+  },
+  loadingCircle: {
+    marginTop: 20,
+    fontSize: 38,
   },
   titleErrorText: {
     color: 'red',
