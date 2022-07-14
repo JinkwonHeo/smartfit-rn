@@ -3,10 +3,12 @@ import React, { useContext, useState, createContext } from 'react';
 const PermissionContext = createContext();
 
 export function PermissionContextProvider({ children }) {
-  const [permission, setPermission] = useState([]);
+  const [permissionStatus, setPermissionStatus] = useState('');
 
   return (
-    <PermissionContext.Provider value={{ permission, setPermission }}>
+    <PermissionContext.Provider
+      value={{ permissionStatus, setPermissionStatus }}
+    >
       {children}
     </PermissionContext.Provider>
   );

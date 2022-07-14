@@ -3,29 +3,24 @@ import { StatusBar } from 'expo-status-bar';
 import { LogBox } from 'react-native';
 import { AuthContextProvider } from './src/context/AuthContext';
 import { LoadingContextProvider } from './src/context/LoadingContext';
-import { ThumbnailContextProvider } from './src/context/ThumbnailContext';
 import { PermissionContextProvider } from './src/context/PermissionContext';
-import { ExerciseDataContextProvider } from './src/context/ExerciseDataContext';
 import { theme } from './theme';
 import NavigationIndex from './src/navigation/index';
 
 LogBox.ignoreLogs([
   'Setting a timer',
   'AsyncStorage has been extracted from react-native core and will be removed in a future release.',
+  'Non-serializable values were found in the navigation state',
 ]);
 
 function App() {
   return (
     <AuthContextProvider>
       <LoadingContextProvider>
-        <ThumbnailContextProvider>
-          <PermissionContextProvider>
-            <ExerciseDataContextProvider>
-              <StatusBar backgroundColor={theme.colors.foreground} />
-              <NavigationIndex />
-            </ExerciseDataContextProvider>
-          </PermissionContextProvider>
-        </ThumbnailContextProvider>
+        <PermissionContextProvider>
+          <StatusBar backgroundColor={theme.colors.foreground} style="light" />
+          <NavigationIndex />
+        </PermissionContextProvider>
       </LoadingContextProvider>
     </AuthContextProvider>
   );

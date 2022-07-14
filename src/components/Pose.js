@@ -10,24 +10,21 @@ import '@tensorflow/tfjs-backend-webgl';
 import * as poseNet from '@tensorflow-models/posenet';
 import { cameraWithTensors } from '@tensorflow/tfjs-react-native';
 
-import { ExerciseDataState } from '../context/ExerciseDataContext';
-import { renderPose, getAngle } from '../utils/poseUtils';
+import { renderPose } from '../utils/poseUtils';
 import useBasicExercise from '../hooks/useBasicExercise';
 import { CAMERA_SIZE } from '../constants/size';
 
 const TensorCamera = cameraWithTensors(Camera);
 
-function Pose({ exerciseName }) {
+function Pose({ exerciseName, setPoseScore }) {
   const [initSetting, setInitSetting] = useState({
     isTfReady: false,
     poseNetModel: null,
   });
-  const [isScreenTouched, setIsScreenTouched] = useState(false);
   const [type, setType] = useState(Camera.Constants.Type.front);
   const [pose, setPose] = useState(null);
   const [rep] = useBasicExercise(pose, exerciseName);
   const tensorCameraRef = createRef();
-  const { exerciseData, setExerciseData } = ExerciseDataState();
   const navigation = useNavigation();
 
   const textureDims =
@@ -90,10 +87,7 @@ function Pose({ exerciseName }) {
 
         if (_predictions) {
           setPose(_predictions);
-
-          if (_predictions.score > 0.85) {
-            setExerciseData((prev) => prev.concat(_predictions));
-          }
+          setPoseScore(_predictions.score);
 
           if (_predictions.score > 0.3) {
             _isEstimate = true;
@@ -126,22 +120,6 @@ function Pose({ exerciseName }) {
     loop();
   };
 
-  const handleExit = () => {
-    setIsScreenTouched(false);
-    navigation.goBack();
-  };
-
-  const handleScreenTouched = () => {
-    setIsScreenTouched(true);
-    setTimeout(() => {
-      setIsScreenTouched(false);
-    }, 5000);
-  };
-
-  useEffect(() => {
-    return () => clearTimeout();
-  }, [isScreenTouched]);
-
   useEffect(() => {
     if (rep === 10) {
       navigation.goBack();
@@ -150,7 +128,7 @@ function Pose({ exerciseName }) {
 
   return (
     <>
-      <View style={styles.container} onTouchEnd={handleScreenTouched}>
+      <View style={styles.container}>
         {initSetting.isTfReady && initSetting.poseNetModel && (
           <>
             <TensorCamera
@@ -185,20 +163,7 @@ function Pose({ exerciseName }) {
                 />
               </TouchableOpacity>
             </View>
-            {isScreenTouched && (
-              <View style={styles.prevButtonWrapper}>
-                <Button title="End" onPress={handleExit} color={'#518cad'} />
-              </View>
-            )}
-
             <View style={styles.modelResults}>{renderPose(pose, rep)}</View>
-            {pose && (
-              <View style={styles.scoreTextContainer}>
-                <Text style={styles.scoreText} key={`item-0`}>
-                  {getAngle(pose, 'rightElbow')}
-                </Text>
-              </View>
-            )}
           </>
         )}
       </View>
@@ -226,34 +191,16 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   buttonContainer: {
-    flex: 1,
-    backgroundColor: 'transparent',
-    flexDirection: 'row',
-    margin: 20,
+    position: 'absolute',
+    top: 20,
+    left: 5,
+    margin: 10,
     zIndex: 13,
-  },
-  button: {
-    flex: 0.1,
-    alignSelf: 'flex-start',
-    alignItems: 'flex-end',
   },
   modelResults: {
     position: 'absolute',
     width: CAMERA_SIZE.width,
     height: CAMERA_SIZE.height,
     zIndex: 12,
-  },
-  scoreTextContainer: {
-    zIndex: 11,
-    position: 'absolute',
-    bottom: 10,
-    backgroundColor: 'rgba(0,0,0,0.1)',
-    padding: 8,
-    borderRadius: 20,
-    alignItems: 'center',
-  },
-  scoreText: {
-    paddingVertical: 2,
-    fontSize: 90,
   },
 });
