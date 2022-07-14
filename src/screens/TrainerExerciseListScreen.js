@@ -31,9 +31,9 @@ export default function TrainerExerciseListScreen({ route, navigation }) {
       <FlatList
         data={videos}
         renderItem={renderTrainerExercise}
-        keyExtractor={(data) => data.title}
+        keyExtractor={(data) => data.url}
         numColumns={1}
-        style={{ marginTop: 50 }}
+        style={{ marginTop: 20 }}
       />
     </View>
   );

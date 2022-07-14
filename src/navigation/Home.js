@@ -12,6 +12,7 @@ import Record from '../components/Record';
 import VideoPostScreen from '../screens/VideoPostScreen';
 import TrainerExerciseListScreen from '../screens/TrainerExerciseListScreen';
 import TrainerExerciseScreen from '../screens/TrainerExerciseScreen';
+import MyExerciseListScreen from '../screens/MyExerciseListScreen';
 
 const Stack = createStackNavigator();
 
@@ -67,12 +68,39 @@ export default function Home() {
             <Stack.Screen
               name="trainerExerciseList"
               component={TrainerExerciseListScreen}
-              options={{ headerShown: false }}
+              options={({ route }) => ({
+                title: `${route.params.item.displayName}'s exercises`,
+                headerStyle: { backgroundColor: '#33ABEF' },
+                headerTitleStyle: {
+                  fontSize: 20,
+                  fontWeight: 'bold',
+                  textShadowColor: 'rgba(0, 0, 0, 0.5)',
+                  textShadowOffset: { width: 2, height: 2 },
+                  textShadowRadius: 5,
+                  color: 'white',
+                },
+              })}
             />
             <Stack.Screen
               name="trainerExerciseScreen"
               component={TrainerExerciseScreen}
               options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="myExerciseListScreen"
+              component={MyExerciseListScreen}
+              options={{
+                title: 'My Exercise',
+                headerStyle: { backgroundColor: '#33ABEF' },
+                headerTitleStyle: {
+                  fontSize: 20,
+                  fontWeight: 'bold',
+                  textShadowColor: 'rgba(0, 0, 0, 0.5)',
+                  textShadowOffset: { width: 2, height: 2 },
+                  textShadowRadius: 5,
+                  color: 'white',
+                },
+              }}
             />
           </>
         )}
