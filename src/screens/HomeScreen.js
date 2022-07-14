@@ -1,14 +1,12 @@
-import React, { useEffect } from 'react';
-import { View, StyleSheet, Image, FlatList } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, StyleSheet, Image, FlatList, Text } from 'react-native';
 import { LoadingState } from '../context/LoadingContext';
 import LoadingCircle from '../components/LoadingCircle';
 import * as VideoThumbnails from 'expo-video-thumbnails';
 import { Asset } from 'expo-asset';
-import { ThumbnailState } from '../context/ThumbnailContext';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { useNavigation } from '@react-navigation/native';
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
   const videos = [
     {
       idx: '0',
@@ -29,9 +27,8 @@ export default function HomeScreen() {
   ];
   const exerciseList = ['squat', 'pushUp', 'lunge', 'dumbbellCurl'];
 
+  const [thumbNails, setThumbNails] = useState([]);
   const { loading, setLoading } = LoadingState();
-  const { thumbNails, setThumbNails } = ThumbnailState();
-  const navigation = useNavigation();
 
   useEffect(() => {
     const generateThumbnails = async () => {
@@ -87,8 +84,11 @@ export default function HomeScreen() {
           })
         }
       >
-        <View style={styles.imageWrapper}>
-          <Image source={{ uri: item.uri }} style={styles.image} />
+        <View style={styles.content}>
+          <View style={styles.exerciseBox}>
+            <Text style={styles.text}>{item.exercise}</Text>
+            <Image source={{ uri: item.uri }} style={styles.image} />
+          </View>
         </View>
       </TouchableOpacity>
     </View>
@@ -96,8 +96,11 @@ export default function HomeScreen() {
 
   return (
     <>
+      <View style={styles.headerBox}>
+        <Text style={styles.headerText}>Exercise Lists</Text>
+      </View>
       {loading ? (
-        <View style={styles.container}>
+        <View style={styles.loadingCircle}>
           <LoadingCircle />
         </View>
       ) : (
@@ -118,13 +121,35 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#fff',
+  },
+  loadingCircle: {
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#fff',
   },
-  imageWrapper: {
+  content: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  exerciseBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  text: {
+    position: 'absolute',
+    bottom: 20,
+    left: 20,
+    fontSize: 26,
+    fontWeight: 'bold',
+    textShadowColor: 'rgba(0, 0, 0, 0.9)',
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 5,
+    color: 'white',
+    zIndex: 1,
   },
   image: {
     width: 380,
@@ -134,8 +159,21 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   thumbNailItem: {
-    flexDirection: 'row',
-    justifyContent: 'center',
     marginBottom: 25,
+  },
+  headerBox: {
+    top: '5%',
+    padding: 12,
+    backgroundColor: '#33ABEF',
+    zIndex: 3,
+  },
+  headerText: {
+    fontSize: 25,
+    left: 15,
+    fontWeight: 'bold',
+    textShadowColor: 'rgba(0, 0, 0, 0.5)',
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 5,
+    color: 'white',
   },
 });

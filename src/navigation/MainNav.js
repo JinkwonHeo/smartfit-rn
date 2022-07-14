@@ -9,7 +9,6 @@ import RecordScreen from '../screens/RecordScreen';
 
 const Tab = createBottomTabNavigator();
 
-// Home: 하단 네비게이션 바
 export default function MainNav() {
   return (
     <Tab.Navigator
@@ -19,6 +18,8 @@ export default function MainNav() {
       screenOptions={{
         tabBarActiveTintColor: '#33ABEF',
         headerShown: false,
+        tabBarStyle: { height: 65 },
+        tabBarLabelStyle: { height: 25, fontSize: 12 },
       }}
     >
       <Tab.Screen

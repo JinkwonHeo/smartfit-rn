@@ -59,7 +59,6 @@ export default function SignIn({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.signInText}>Welcome to SmartFit!</Text>
       <Image
         source={require('../../assets/smartfit.png')}
         style={styles.image}
@@ -113,8 +112,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   image: {
-    width: 180,
-    height: 180,
+    width: 220,
+    height: 220,
   },
   viewMargin: {
     marginTop: 20,
