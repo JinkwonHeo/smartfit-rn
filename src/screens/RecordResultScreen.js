@@ -8,12 +8,13 @@ import { auth } from '../utils/firebase';
 export default function RecordResultScreen({ route, navigation }) {
   const videoRef = useRef(null);
   const [token, setToken] = useState(null);
-  const { recordedVideo } = route.params;
+  const { recordedVideo, setIsRecording } = route.params;
   const uri = recordedVideo.uri;
   const isFocused = useIsFocused();
 
   useState(async () => {
     const userToken = await auth.currentUser.getIdToken(true);
+    setIsRecording(true);
     setToken(userToken);
   }, []);
 

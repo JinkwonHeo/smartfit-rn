@@ -6,7 +6,7 @@ import {
   Button,
   StyleSheet,
 } from 'react-native';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import Constants from 'expo-constants';
 import { Asset } from 'expo-asset';
@@ -16,6 +16,7 @@ import { pickImage, askForPermission, uploadImage } from '../utils/utils';
 import { auth, db } from '../utils/firebase';
 import { updateProfile } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
+import { PermissionState } from '../context/PermissionContext';
 import { LoadingState } from '../context/LoadingContext';
 import LoadingCircle from '../components/LoadingCircle';
 import { theme } from '../../theme';
@@ -26,8 +27,8 @@ const DEFAULT_PHOTO = Asset.fromModule(require('../../assets/face.png')).uri;
 export default function Profile() {
   const [displayName, setDisplayName] = useState('');
   const [selectedImage, setSelectedImage] = useState(DEFAULT_PHOTO);
-  const [permissionStatus, setPermissionStatus] = useState('');
   const { loading, setLoading } = LoadingState();
+  const { permissionStatus, setPermissionStatus } = PermissionState();
 
   useEffect(() => {
     setLoading(false);

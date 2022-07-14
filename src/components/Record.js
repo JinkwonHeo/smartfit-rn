@@ -52,7 +52,10 @@ function Record({ navigation }) {
         if (videoRecordPromise) {
           const recordedVideo = await videoRecordPromise;
 
-          navigation.navigate('recordResult', { recordedVideo });
+          navigation.navigate('recordResult', {
+            recordedVideo,
+            setIsRecording,
+          });
         }
       } else {
         cameraRef.current.stopRecording();
