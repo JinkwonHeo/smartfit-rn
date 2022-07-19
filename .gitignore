@@ -6,6 +6,7 @@ dist/
 *.mobileprovision
 *.orig.*
 .prettierrc.json
+.prettierignore
 
 # Node
 node_modules/
