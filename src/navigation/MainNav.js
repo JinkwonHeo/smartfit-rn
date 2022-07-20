@@ -4,7 +4,6 @@ import { Feather, MaterialCommunityIcons, Entypo } from '@expo/vector-icons';
 import HomeScreen from '../screens/HomeScreen';
 import Trainers from '../screens/Trainers';
 import EtcScreen from '../screens/EtcScreen';
-import FaceDetect from '../screens/FaceDetect';
 import RecordScreen from '../screens/RecordScreen';
 
 const Tab = createBottomTabNavigator();
@@ -50,15 +49,6 @@ export default function MainNav() {
         options={{
           tabBarIcon: ({ color }) => (
             <Feather name="video" size={24} color={color} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="FaceDetect"
-        component={FaceDetect}
-        options={{
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="face" size={24} color={color} />
           ),
         }}
       />
