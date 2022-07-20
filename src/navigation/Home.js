@@ -5,7 +5,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Profile from '../screens/Profile';
 import ExerciseScreen from '../screens/ExerciseScreen';
 import MainNav from './MainNav';
-import Face from '../components/Face';
 import Pose from '../components/Pose';
 import RecordResultScreen from '../screens/RecordResultScreen';
 import Record from '../components/Record';
@@ -13,6 +12,7 @@ import VideoPostScreen from '../screens/VideoPostScreen';
 import TrainerExerciseListScreen from '../screens/TrainerExerciseListScreen';
 import TrainerExerciseScreen from '../screens/TrainerExerciseScreen';
 import MyExerciseListScreen from '../screens/MyExerciseListScreen';
+import EditProfileScreen from '../screens/EditProfileScreen';
 
 const Stack = createStackNavigator();
 
@@ -34,11 +34,6 @@ export default function Home() {
               name="mainNav"
               component={MainNav}
               options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="face"
-              component={Face}
-              // options={{ headerShown: false }}
             />
             <Stack.Screen
               name="pose"
@@ -85,6 +80,22 @@ export default function Home() {
               name="trainerExerciseScreen"
               component={TrainerExerciseScreen}
               options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="editProfileScreen"
+              component={EditProfileScreen}
+              options={{
+                title: 'Edit profile',
+                headerStyle: { backgroundColor: '#33ABEF' },
+                headerTitleStyle: {
+                  fontSize: 20,
+                  fontWeight: 'bold',
+                  textShadowColor: 'rgba(0, 0, 0, 0.5)',
+                  textShadowOffset: { width: 2, height: 2 },
+                  textShadowRadius: 5,
+                  color: 'white',
+                },
+              }}
             />
             <Stack.Screen
               name="myExerciseListScreen"
