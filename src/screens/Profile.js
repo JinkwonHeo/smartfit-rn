@@ -63,7 +63,13 @@ export default function Profile() {
 
     await Promise.all([
       updateProfile(user, userData),
-      setDoc(doc(db, 'users', user.uid), { ...userData, uid: user.uid }),
+      setDoc(doc(db, 'users', user.uid), {
+        ...userData,
+        uid: user.uid,
+        liked: 0,
+        likeTrainers: [],
+        videos: [],
+      }),
     ]);
 
     setLoading(false);
@@ -109,7 +115,15 @@ export default function Profile() {
               size={45}
             />
           ) : (
-            <Image source={{ uri: selectedImage }} style={styles.image} />
+            <>
+              <Image source={{ uri: selectedImage }} style={styles.image} />
+              <MaterialCommunityIcons
+                name="camera-plus"
+                style={styles.cameraIcon}
+                color={colors.iconGray}
+                size={45}
+              />
+            </>
           )}
         </TouchableOpacity>
         <TextInput
@@ -162,6 +176,11 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     borderRadius: 120,
+  },
+  cameraIcon: {
+    position: 'absolute',
+    bottom: -10,
+    right: -10,
   },
   namePlaceholder: {
     borderBottomColor: colors.primary,
