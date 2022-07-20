@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useIsFocused } from '@react-navigation/native';
 import { Entypo } from '@expo/vector-icons';
 import { UserAuth } from '../context/AuthContext';
 import { auth } from '../utils/firebase';
@@ -11,17 +12,29 @@ const colors = theme.colors;
 const WINDOW_SIZE = Dimensions.get('window');
 
 export default function EtcScreen({ navigation }) {
+  const [photoURL, setPhotoURL] = useState(auth.currentUser.photoURL);
   const { setCurrUser } = UserAuth();
-  const { photoURL, displayName } = auth.currentUser;
+  const { displayName } = auth.currentUser;
+  const isFocused = useIsFocused();
 
   const handleMyList = () => {
     navigation.navigate('myExerciseListScreen');
+  };
+
+  const handleEditProfile = () => {
+    navigation.navigate('editProfileScreen');
   };
 
   const handleSignOut = async () => {
     await signOut(auth);
     setCurrUser(null);
   };
+
+  useEffect(() => {
+    if (isFocused) {
+      setPhotoURL(auth.currentUser.photoURL);
+    }
+  }, [isFocused]);
 
   return (
     <View style={styles.container}>
@@ -34,7 +47,19 @@ export default function EtcScreen({ navigation }) {
           onPress={handleMyList}
           style={{ ...styles.etcMenuList, borderTopWidth: 5 }}
         >
-          <Text style={styles.etcMenuListText}>My List</Text>
+          <Text style={styles.etcMenuListText}>My exercise list</Text>
+          <Entypo
+            name="chevron-right"
+            size={30}
+            color={colors.foreground}
+            style={styles.rightIcon}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={handleEditProfile}
+          style={styles.etcMenuList}
+        >
+          <Text style={styles.etcMenuListText}>Edit profile</Text>
           <Entypo
             name="chevron-right"
             size={30}

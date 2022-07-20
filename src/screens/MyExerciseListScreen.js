@@ -29,8 +29,10 @@ export default function MyExerciseListScreen() {
   const getExerciseData = async () => {
     try {
       if (user && db) {
+        setIsListLoaded(true);
         const docRef = doc(db, 'users', user.uid);
         const docSnap = await getDoc(docRef);
+        setIsListLoaded(false);
 
         if (docSnap.exists()) {
           setExerciseData([...docSnap.data().videos]);
@@ -73,14 +75,6 @@ export default function MyExerciseListScreen() {
   useEffect(() => {
     getExerciseData();
   }, []);
-
-  useEffect(() => {
-    if (!exerciseData.length) {
-      setIsListLoaded(true);
-    } else {
-      setIsListLoaded(false);
-    }
-  }, [exerciseData.length]);
 
   const renderMyExercise = ({ item }) => (
     <TouchableOpacity
