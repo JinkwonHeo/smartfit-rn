@@ -9,23 +9,33 @@ import {
   StyleSheet,
 } from 'react-native';
 import React, { useState, useEffect, useRef } from 'react';
-import { signIn } from '../utils/firebase';
+import { auth, signIn, signInWithGoogle } from '../utils/firebase';
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../utils/firebase';
+import { Asset } from 'expo-asset';
+import * as WebBrowser from 'expo-web-browser';
+import * as Google from 'expo-auth-session/providers/google';
 import { UserAuth } from '../context/AuthContext';
 import { theme } from '../../theme';
 import { validateEmail, removeWhitespace } from '../utils/utils';
 import ErrorMessage from '../components/ErrorMessage';
+import { CLIENT_ID } from '@env';
 
 const colors = theme.colors;
+WebBrowser.maybeCompleteAuthSession();
 
 export default function SignIn({ navigation }) {
   const { setCurrUser } = UserAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const googleButtonImage = Asset.fromModule(
+    require('../../assets/google-button.png')
+  );
 
   const refPassword = useRef();
+  const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
+    clientId: CLIENT_ID,
+  });
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -36,6 +46,10 @@ export default function SignIn({ navigation }) {
 
     return () => unsubscribe();
   }, []);
+
+  useEffect(async () => {
+    signInWithGoogle(response);
+  }, [response]);
 
   const handleSignIn = async () => {
     try {
@@ -91,6 +105,19 @@ export default function SignIn({ navigation }) {
             />
           </TouchableOpacity>
         </View>
+        <View style={styles.viewMargin}>
+          <TouchableOpacity
+            onPress={() => {
+              promptAsync();
+            }}
+          >
+            <Image
+              source={googleButtonImage}
+              style={styles.googleButtonImage}
+            />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.viewMargin}></View>
         <TouchableOpacity style={{ marginTop: 15 }} onPress={handleSignUpPress}>
           <Text style={styles.signupText}>Don't have an account? Join us!</Text>
         </TouchableOpacity>
@@ -118,15 +145,18 @@ const styles = StyleSheet.create({
   viewMargin: {
     marginTop: 20,
   },
+  googleButtonImage: {
+    width: 220,
+  },
   emailInputText: {
     borderBottomColor: colors.primary,
     borderBottomWidth: 2,
-    width: 200,
+    width: 220,
   },
   passwordInputText: {
     borderBottomColor: colors.primary,
     borderBottomWidth: 2,
-    width: 200,
+    width: 220,
     marginTop: 20,
   },
   signupText: {

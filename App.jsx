@@ -11,6 +11,7 @@ LogBox.ignoreLogs([
   'Setting a timer',
   'AsyncStorage has been extracted from react-native core and will be removed in a future release.',
   'Non-serializable values were found in the navigation state',
+  'Constants.',
 ]);
 
 function App() {

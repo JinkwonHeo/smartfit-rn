@@ -3,6 +3,8 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
   signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithCredential,
 } from 'firebase/auth';
 import { getStorage } from 'firebase/storage';
 import { initializeFirestore } from 'firebase/firestore';
@@ -14,6 +16,7 @@ import {
   FIREBASE_MESSAGING_SENDER_ID,
   FIREBASE_APPID,
 } from '@env';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: FIREBASE_APIKEY,
@@ -37,4 +40,34 @@ export function signIn(email, password) {
 
 export function signUp(email, password) {
   return createUserWithEmailAndPassword(auth, email, password);
+}
+
+export async function signInWithGoogle(response) {
+  if (response?.type === 'success') {
+    const { id_token } = response.params;
+    const loginResult = await signInWithCredential(
+      auth,
+      GoogleAuthProvider.credential(id_token)
+    );
+    const { displayName, uid, email, photoURL } = loginResult.user;
+
+    const docRef = doc(db, 'users', loginResult.user.uid);
+    const docSnap = await getDoc(docRef);
+
+    if (loginResult && !docSnap.exists()) {
+      setDoc(
+        doc(db, 'users', loginResult.user.uid),
+        {
+          displayName,
+          uid,
+          email,
+          photoURL,
+          liked: 0,
+          likeTrainers: [],
+          videos: [],
+        },
+        { merge: true }
+      );
+    }
+  }
 }
