@@ -56,9 +56,16 @@ export default function ExerciseScreen({ route }) {
           setPoseScore={setPoseScore}
         />
       </View>
-      {!isUserReady && (
-        <Overlay onBackdropPress={toggleOverlay}>
-          <Text>카메라 앞에 서면 운동이 시작됩니다!</Text>
+      {!isUserReady && poseScore < 0.9 && (
+        <Overlay
+          onBackdropPress={toggleOverlay}
+          overlayStyle={styles.overlay}
+          backdropStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.8)' }}
+        >
+          <Text style={styles.informText}>전신이 나오도록 서주세요!</Text>
+          <Text style={styles.informText}>
+            카메라 앞에 서면 운동이 시작됩니다!
+          </Text>
         </Overlay>
       )}
     </View>
@@ -83,5 +90,19 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     color: 'white',
+  },
+  overlay: {
+    borderRadius: 30,
+    position: 'absolute',
+    top: 200,
+    padding: 20,
+    paddingVertical: 40,
+    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+  },
+  informText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    paddingVertical: 3,
   },
 });
