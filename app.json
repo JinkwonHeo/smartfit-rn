@@ -10,6 +10,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "scheme": "com.vaco.smartfit",
     "updates": {
       "fallbackToCacheTimeout": 0
     },
@@ -19,6 +20,7 @@
     },
     "android": {
       "package": "com.vaco.smartfit",
+      "googleServicesFile": "./google-services.json",
       "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/smartfit.png",
