@@ -16,7 +16,6 @@ SmartFit은 혼자서 운동하더라도 정확한 자세로 운동할 수 있�
 
 ## 목차
 
-- [SmartFit](#-smartfit)
 - [기획동기](#💡-기획동기)
 - [프로젝트 기간](#📅-프로젝트기간)
 - [주요기능](#📌-주요기능)
@@ -24,8 +23,9 @@ SmartFit은 혼자서 운동하더라도 정확한 자세로 운동할 수 있�
 - [챌린지](#🏁-챌린지)
 - [프로젝트를 마치며](#🙇-프로젝트를-마치며)
 
-## Github Repositories
+## 🔗 배포 & 링크
 
+- [안드로이드 설치파일 링크](https://drive.google.com/file/d/1UeGg2sHBZo6StiSrCkNpAgkrkq9W8-JP/view)
 - [React-Native Repo](https://github.com/JinkwonHeo/smartfit-rn)
 - [Backend Repo](https://github.com/JinkwonHeo/smartfit-server)
 
