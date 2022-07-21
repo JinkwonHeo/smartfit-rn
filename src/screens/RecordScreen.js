@@ -49,9 +49,10 @@ const styles = StyleSheet.create({
     marginBottom: 25,
   },
   headerBox: {
-    top: '5%',
-    padding: 12,
+    top: '4%',
+    padding: 15,
     backgroundColor: '#33ABEF',
+    zIndex: 3,
   },
   headerText: {
     fontSize: 25,
