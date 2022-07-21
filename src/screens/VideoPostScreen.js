@@ -7,21 +7,24 @@ import {
   Image,
   TouchableOpacity,
   ToastAndroid,
+  Keyboard,
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import axios from 'axios';
 
-import { auth } from '../utils/firebase';
+import { doc, updateDoc, arrayUnion } from 'firebase/firestore';
+import { auth, db } from '../utils/firebase';
 import { uploadImage, uploadVideo } from '../utils/utils';
 
 import { LoadingState } from '../context/LoadingContext';
 import LoadingCircle from '../components/LoadingCircle';
+import { SERVER_URL } from '@env';
 
 export default function VideoPostScreen({ route, navigation }) {
   const [exerciseTitle, setExerciseTitle] = useState('');
   const [titleError, setTitleError] = useState('');
   const { loading, setLoading } = LoadingState();
-  const { uri, thumbNail, token } = route.params;
+  const { uri, thumbNail } = route.params;
 
   const handlePost = async () => {
     if (exerciseTitle === '') {
@@ -31,6 +34,7 @@ export default function VideoPostScreen({ route, navigation }) {
     }
 
     setLoading(true);
+    Keyboard.dismiss();
 
     const user = auth.currentUser;
     let videoURL;
@@ -61,17 +65,20 @@ export default function VideoPostScreen({ route, navigation }) {
     }
 
     const uploadToFireStore = async () => {
-      const result = await axios.post(
-        `${process.env.SERVER_URL}/api/tensorflows/posenet`,
-        {
-          user: auth.currentUser.uid,
-          url: videoURL,
-          fileName: videoFileName,
-          thumbnail: thumbnailURL,
-        }
-      );
+      const result = await axios.post(`${SERVER_URL}/api/tensorflows/posenet`, {
+        user: auth.currentUser.uid,
+        url: videoURL,
+        fileName: videoFileName,
+        thumbnail: thumbnailURL,
+      });
 
       if (result) {
+        const videoData = {
+          videos: arrayUnion(...[result.data]),
+        };
+
+        await updateDoc(doc(db, 'users', user.uid), { ...videoData });
+
         ToastAndroid.showWithGravityAndOffset(
           'Video analyze complete!',
           ToastAndroid.LONG,
@@ -104,8 +111,8 @@ export default function VideoPostScreen({ route, navigation }) {
       </View>
       <View style={styles.infoContainer}>
         <TextInput
-          style={styles.title}
-          maxLength={50}
+          style={styles.textInput}
+          maxLength={20}
           placeholder="Exercise name"
           onChangeText={setExerciseTitle}
         />
@@ -156,9 +163,12 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     width: '40%',
   },
-  title: {
+  textInput: {
+    width: '100%',
     height: 50,
-    marginBottom: 10,
+    marginBottom: 5,
+    marginTop: 30,
+    borderBottomWidth: 2,
   },
   infoContainer: {
     margin: 20,
