@@ -162,21 +162,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
   },
-  headerBox: {
-    top: '5%',
-    padding: 16,
-    backgroundColor: colors.foreground,
-    zIndex: 3,
-  },
-  headerText: {
-    fontSize: 25,
-    left: 15,
-    fontWeight: 'bold',
-    textShadowColor: 'rgba(0, 0, 0, 0.5)',
-    textShadowOffset: { width: 2, height: 2 },
-    textShadowRadius: 5,
-    color: colors.white,
-  },
   content: {
     flex: 1,
     paddingLeft: 7,
