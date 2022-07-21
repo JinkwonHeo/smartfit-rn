@@ -42,8 +42,8 @@ function Record({ navigation }) {
     if (cameraRef) {
       if (isRecording) {
         const options = {
-          maxDuration: 15,
-          maxFileSize: 8 * 1024 * 1024,
+          maxDuration: 30,
+          maxFileSize: 10 * 1024 * 1024,
           quality: Camera.Constants.VideoQuality['4:3'],
         };
 

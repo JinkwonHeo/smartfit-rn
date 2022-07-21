@@ -71,11 +71,11 @@ export const renderPose = (pose, rep) => {
           fill="white"
           fontSize="45"
           fontWeight="bold"
-          x="300"
+          x="200"
           y="58"
           textAnchor="middle"
         >
-          Rep:{rep}
+          {rep < 30 ? `Rep: ${rep}` : `Similarity: ${rep}`}
         </svgComponents.Text>
       </svgComponents.Svg>
     );

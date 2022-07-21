@@ -1,9 +1,8 @@
 import React, { createRef, useEffect, useState } from 'react';
-import { Platform, StyleSheet, View, Text } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import { Camera } from 'expo-camera';
 import { MaterialIcons } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { useNavigation } from '@react-navigation/native';
 
 import * as tf from '@tensorflow/tfjs';
 import '@tensorflow/tfjs-backend-webgl';
@@ -22,9 +21,8 @@ function TrainerExerciseModePoseDetect({ poseData, setPoseScore }) {
   });
   const [type, setType] = useState(Camera.Constants.Type.front);
   const [pose, setPose] = useState(null);
-  const [rep, setRep] = useState(0);
+  const [similarity, setSimilarity] = useState(0.3);
   const tensorCameraRef = createRef();
-  const navigation = useNavigation();
   let index = 0;
 
   const textureDims =
@@ -49,6 +47,9 @@ function TrainerExerciseModePoseDetect({ poseData, setPoseScore }) {
 
     try {
       const isBackendMethodReady = await tf.setBackend('rn-webgl');
+      tf.env().set('WEBGL_PACK_DEPTHWISECONV', false);
+      await tf.ready();
+      tf.getBackend();
 
       if (isBackendMethodReady) {
         console.log('[+] Tensorflow Ready!');
@@ -95,15 +96,16 @@ function TrainerExerciseModePoseDetect({ poseData, setPoseScore }) {
               _predictions
             );
 
-            console.log('index: ', index);
-            console.log('cosineDistance: ', cosineDistance);
-            console.log('정확도: ', 1 - cosineDistance);
+            if (1 - cosineDistance < 0.55) {
+              setSimilarity((1 - cosineDistance) * 0.9);
+            } else if (1 - cosineDistance > 0.5) {
+              setSimilarity(1 - cosineDistance + 0.2);
+            }
 
-            if (cosineDistance < 0.52) {
+            if (1 - cosineDistance > 0.5) {
               index++;
 
               if (index >= poseData.length) {
-                setRep((prev) => prev + 1);
                 index = 0;
               }
             }
@@ -143,12 +145,6 @@ function TrainerExerciseModePoseDetect({ poseData, setPoseScore }) {
     loop();
   };
 
-  useEffect(() => {
-    if (rep === 10) {
-      navigation.goBack();
-    }
-  }, [rep]);
-
   return (
     <>
       <View style={styles.container}>
@@ -185,7 +181,9 @@ function TrainerExerciseModePoseDetect({ poseData, setPoseScore }) {
                 />
               </TouchableOpacity>
             </View>
-            <View style={styles.modelResults}>{renderPose(pose, rep)}</View>
+            <View style={styles.modelResults}>
+              {renderPose(pose, Math.floor(similarity * 100))}
+            </View>
           </>
         )}
       </View>
