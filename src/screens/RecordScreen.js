@@ -38,9 +38,6 @@ function RecordScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.headerBox}>
-        <Text style={styles.headerText}>Record</Text>
-      </View>
       <View
         style={{
           flex: 1,
@@ -89,7 +86,7 @@ function RecordScreen({ navigation }) {
             onPress={() => navigation.navigate('record')}
             style={styles.recordStartButton}
           >
-            <Text style={styles.buttonText}>Record start</Text>
+            <Text style={styles.buttonText}>녹화 시작</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -115,6 +112,7 @@ const styles = StyleSheet.create({
   recordStartButton: {
     backgroundColor: colors.white,
     padding: 12,
+    paddingHorizontal: 20,
     borderRadius: 10,
   },
   buttonText: {

@@ -21,6 +21,7 @@ import { theme } from '../../theme';
 import { validateEmail, removeWhitespace } from '../utils/utils';
 import ErrorMessage from '../components/ErrorMessage';
 import { CLIENT_ID } from '@env';
+import { StatusBar } from 'expo-status-bar';
 
 const colors = theme.colors;
 WebBrowser.maybeCompleteAuthSession();
@@ -75,6 +76,7 @@ export default function SignIn({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <StatusBar backgroundColor="transparent" />
       <Image
         source={require('../../assets/smartfit-removebg_upscale_cut.png')}
         style={styles.logoImage}
@@ -88,7 +90,7 @@ export default function SignIn({ navigation }) {
         <View style={styles.viewMargin}>
           <TextInput
             placeholder="Email"
-            placeholderTextColor="white"
+            placeholderTextColor="rgba(255, 255, 255, 0.55)"
             value={email}
             onChangeText={handleEmailChange}
             onSubmitEditing={() => refPassword.current.focus()}
@@ -98,7 +100,7 @@ export default function SignIn({ navigation }) {
           <TextInput
             ref={refPassword}
             placeholder="Password"
-            placeholderTextColor="white"
+            placeholderTextColor="rgba(255, 255, 255, 0.55)"
             secureTextEntry
             value={password}
             onChangeText={setPassword}
@@ -108,9 +110,12 @@ export default function SignIn({ navigation }) {
             <TouchableOpacity>
               <Button
                 title="signIn"
-                disabled={!password || !email}
-                color={colors.secondary}
-                onPress={handleSignIn}
+                color={
+                  !password || !email
+                    ? 'rgba(255, 255, 255, 0.55)'
+                    : 'rgba(43, 131, 236, 0.9)'
+                }
+                onPress={!password || !email ? null : () => handleSignIn()}
               />
             </TouchableOpacity>
           </View>
@@ -131,9 +136,8 @@ export default function SignIn({ navigation }) {
             style={{ marginTop: 15 }}
             onPress={handleSignUpPress}
           >
-            <Text style={styles.signupText}>
-              Don't have an account? Join us!
-            </Text>
+            <Text style={styles.signupText}>Don't have an account?</Text>
+            <Text style={styles.joinUs}>Join us!</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -149,11 +153,11 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   loginComponents: {
-    marginTop: 320,
+    marginTop: 370,
   },
   logoImage: {
     position: 'absolute',
-    top: SCREEN_SIZE.height / 16,
+    top: SCREEN_SIZE.height / 20,
     left: SCREEN_SIZE.width / 100,
     width: 120,
     height: 120,
@@ -172,19 +176,29 @@ const styles = StyleSheet.create({
   },
   googleButtonImage: {
     width: 220,
+    opacity: 0.9,
   },
   emailInputText: {
-    borderBottomColor: colors.primary,
-    borderBottomWidth: 2,
     width: 220,
+    paddingLeft: 5,
+    borderBottomColor: colors.white,
+    borderBottomWidth: 2,
+    color: colors.white,
   },
   passwordInputText: {
-    borderBottomColor: colors.primary,
-    borderBottomWidth: 2,
     width: 220,
+    paddingLeft: 5,
+    borderBottomColor: colors.white,
+    borderBottomWidth: 2,
     marginTop: 10,
+    color: colors.white,
   },
   signupText: {
+    textAlign: 'center',
     color: colors.white,
+  },
+  joinUs: {
+    textAlign: 'center',
+    color: colors.primary,
   },
 });
