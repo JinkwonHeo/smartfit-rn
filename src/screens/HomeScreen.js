@@ -97,7 +97,7 @@ export default function HomeScreen({ navigation }) {
   return (
     <>
       <View style={styles.headerBox}>
-        <Text style={styles.headerText}>Exercise Lists</Text>
+        <Text style={styles.headerText}>SmartFit Exercise</Text>
       </View>
       {loading ? (
         <View style={styles.loadingCircle}>

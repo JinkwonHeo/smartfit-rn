@@ -189,11 +189,7 @@ export default function Trainers({ navigation }) {
         <LinearGradient
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
-          colors={[
-            'rgba(76, 102, 159, 0.7)',
-            'rgba(108, 189, 235, 0.6)',
-            '#ffffff',
-          ]}
+          colors={['rgba(102, 153, 255, 0.7)', '#ffffff']}
           style={styles.trainerBox}
         >
           <AntDesign
@@ -214,7 +210,7 @@ export default function Trainers({ navigation }) {
   return (
     <>
       <View style={styles.headerBox}>
-        <Text style={styles.headerText}>Trainer Lists</Text>
+        <Text style={styles.headerText}>Trainers</Text>
       </View>
       {isListLoaded ? (
         <View style={styles.loadingCircle}>
@@ -367,6 +363,7 @@ const styles = StyleSheet.create({
   },
   trainerName: {
     fontSize: 21,
+    fontWeight: 'bold',
     textShadowColor: 'rgba(0, 0, 0, 0.5)',
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 5,
@@ -409,6 +406,9 @@ const styles = StyleSheet.create({
     left: 30,
     fontSize: 35,
     fontWeight: 'bold',
+    textShadowColor: 'rgba(0, 0, 0, 0.5)',
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 5,
   },
   trainerDescription: {
     position: 'absolute',
@@ -416,6 +416,9 @@ const styles = StyleSheet.create({
     left: 30,
     fontSize: 25,
     fontWeight: 'bold',
+    textShadowColor: 'rgba(0, 0, 0, 0.5)',
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 5,
   },
   likeButtonContainer: {
     position: 'absolute',

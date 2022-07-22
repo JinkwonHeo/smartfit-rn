@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Alert,
   StyleSheet,
+  ImageBackground,
 } from 'react-native';
 import React, { useState, useEffect, useRef } from 'react';
 import { auth, signIn, signInWithGoogle } from '../utils/firebase';
@@ -14,6 +15,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { Asset } from 'expo-asset';
 import * as WebBrowser from 'expo-web-browser';
 import * as Google from 'expo-auth-session/providers/google';
+import { SCREEN_SIZE } from '../constants/size';
 import { UserAuth } from '../context/AuthContext';
 import { theme } from '../../theme';
 import { validateEmail, removeWhitespace } from '../utils/utils';
@@ -74,53 +76,66 @@ export default function SignIn({ navigation }) {
   return (
     <View style={styles.container}>
       <Image
-        source={require('../../assets/smartfit.png')}
-        style={styles.image}
+        source={require('../../assets/smartfit-removebg_upscale_cut.png')}
+        style={styles.logoImage}
         resizeMode="cover"
       />
-      <View style={styles.viewMargin}>
-        <TextInput
-          placeholder="Email"
-          value={email}
-          onChangeText={handleEmailChange}
-          onSubmitEditing={() => refPassword.current.focus()}
-          style={styles.emailInputText}
-        />
-        <ErrorMessage message={errorMessage} />
-        <TextInput
-          ref={refPassword}
-          placeholder="Password"
-          secureTextEntry
-          value={password}
-          onChangeText={setPassword}
-          style={styles.passwordInputText}
-        />
+      <ImageBackground
+        source={require('../../assets/titleImage.jpg')}
+        style={styles.titleImage}
+      ></ImageBackground>
+      <View style={styles.loginComponents}>
         <View style={styles.viewMargin}>
-          <TouchableOpacity>
-            <Button
-              title="signIn"
-              disabled={!password || !email}
-              color={colors.secondary}
-              onPress={handleSignIn}
-            />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.viewMargin}>
+          <TextInput
+            placeholder="Email"
+            placeholderTextColor="white"
+            value={email}
+            onChangeText={handleEmailChange}
+            onSubmitEditing={() => refPassword.current.focus()}
+            style={styles.emailInputText}
+          />
+          <ErrorMessage message={errorMessage} />
+          <TextInput
+            ref={refPassword}
+            placeholder="Password"
+            placeholderTextColor="white"
+            secureTextEntry
+            value={password}
+            onChangeText={setPassword}
+            style={styles.passwordInputText}
+          />
+          <View style={styles.viewMargin}>
+            <TouchableOpacity>
+              <Button
+                title="signIn"
+                disabled={!password || !email}
+                color={colors.secondary}
+                onPress={handleSignIn}
+              />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.viewMargin}>
+            <TouchableOpacity
+              onPress={() => {
+                promptAsync();
+              }}
+            >
+              <Image
+                source={googleButtonImage}
+                style={styles.googleButtonImage}
+              />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.viewMargin}></View>
           <TouchableOpacity
-            onPress={() => {
-              promptAsync();
-            }}
+            style={{ marginTop: 15 }}
+            onPress={handleSignUpPress}
           >
-            <Image
-              source={googleButtonImage}
-              style={styles.googleButtonImage}
-            />
+            <Text style={styles.signupText}>
+              Don't have an account? Join us!
+            </Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.viewMargin}></View>
-        <TouchableOpacity style={{ marginTop: 15 }} onPress={handleSignUpPress}>
-          <Text style={styles.signupText}>Don't have an account? Join us!</Text>
-        </TouchableOpacity>
       </View>
     </View>
   );
@@ -133,14 +148,24 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
   },
-  signInText: {
-    color: colors.foreground,
-    fontSize: 24,
-    marginBottom: 20,
+  loginComponents: {
+    marginTop: 320,
   },
-  image: {
-    width: 220,
-    height: 220,
+  logoImage: {
+    position: 'absolute',
+    top: SCREEN_SIZE.height / 16,
+    left: SCREEN_SIZE.width / 100,
+    width: 120,
+    height: 120,
+    zIndex: 1,
+  },
+  titleImage: {
+    position: 'absolute',
+    right: 0,
+    width: SCREEN_SIZE.width + 50,
+    height: SCREEN_SIZE.height + 100,
+    resizeMode: 'cover',
+    backgroundColor: 'black',
   },
   viewMargin: {
     marginTop: 20,
@@ -157,9 +182,9 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.primary,
     borderBottomWidth: 2,
     width: 220,
-    marginTop: 20,
+    marginTop: 10,
   },
   signupText: {
-    color: colors.secondaryText,
+    color: colors.white,
   },
 });
