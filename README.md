@@ -93,7 +93,7 @@ SmartFit은 혼자서 운동하더라도 정확한 자세로 운동할 수 있�
 
 https://user-images.githubusercontent.com/102529818/180385315-5f9f9f21-1e9a-4c04-a498-838e14229faf.mp4
 
-- SmartFit UI
+- SmartFit UI/UX
 
 https://user-images.githubusercontent.com/102529818/180385330-de9ca5f9-305e-4e2e-958f-a721a47e6c31.mp4
 
