@@ -25,9 +25,13 @@ SmartFit은 혼자서 운동하더라도 정확한 자세로 운동할 수 있�
 
 ## 🔗 배포 & 링크
 
-- [안드로이드 설치파일 링크](https://drive.google.com/file/d/1UeGg2sHBZo6StiSrCkNpAgkrkq9W8-JP/view)
+- [안드로이드 설치파일 링크](https://drive.google.com/file/d/1pcRRX8W0DgumB0mbrOlXS59R5HlHtXdZ/view?usp=sharing)
 - [React-Native Repo](https://github.com/JinkwonHeo/smartfit-rn)
 - [Backend Repo](https://github.com/JinkwonHeo/smartfit-server)
+
+## 설치방법
+1. [안드로이드 설치파일 링크](https://drive.google.com/file/d/1pcRRX8W0DgumB0mbrOlXS59R5HlHtXdZ/view?usp=sharing)에서 smartfit_final.apk파일을 다운로드 받습니다.
+2. 다운로드 받은 smartfit_final.apk파일을 휴대폰의 '내 파일' 혹은 '파일관리자'앱에서 실행시켜 설치합니다.
 
 <br>
 
@@ -161,7 +165,16 @@ react native를 처음 개발하려면 native환경에 맞도록 여러가지 �
   - tensorflow posenet으로부터 받아온 정보를 가공하고 유저의 자세와 비교하는 알고리즘을 구현하는 과정에서 수학이 많이 필요했습니다. 기본적인 삼각함수부터 두 데이터군의 유사성을 비교하는 cosine similarity 등 학생시절 많이 들어보고 사용해봤던 개념도 있었고 처음보는 개념도 있었습니다. <br>
     수학 관련 라이브러리를 사용한다면 쉽게 갈 수 있었지만 사용하지 않은 이유는 수학이론에 대해 완벽하게는 이해하지 못하더라도 왜 이 공식을 써야하는지 알고 구현하고 싶었고 앞으로 비슷한 사항을 구현해야 할 때 다시 적용할 수 있도록 익숙해지기 위해 사용하지 않았습니다.
     비록 완벽한 알고리즘은 아니지만 관련된 이론을 학습하고 프로그래밍에 적용해 볼 수 있었습니다.
+### **Firestore 통신 최소화**
+  - 클라이언트에서 서버로의 요청 혹은 API호출을 최소화 하는 것은 어떤 프로젝트를 수행하던 필요하지만 이번 프로젝트에서는 mongoDB를 사용하지 않고 firestore cloud서비스를 이용하였기 때문에 통신횟수를 최소화하려고 노력하였습니다. <br>
+  firestore는 하루에 무료로 제공되는 사용량이 있지만 이를 모두 사용하면 요금이 청구됩니다. 사용자 입장에서는 한 번의 요청이지만 어플리케이션을 서비스하는 입장에서는 여러 사용자의 요청을 처리해야 하므로 서비스비용이 매우 늘어날 수 있다는 생각이 들었습니다. 따라서 사용자의 경험을 저하시키지 않으면서 통신을 최소화하여 서비스 품질과 비용을 모두 잡을 수 있도록 하였습니다. <br>
 
+ <details><summary>통신 최소화를 위한 구현 사항</summary>
+  - 동영상 썸네일을 추출 후 로컬(어플리케이션)에 저장하였습니다. <br>
+  - 사용자 프로필 수정을 할 때 바뀐 사항에 대해서만 통신이 일어나도록 구현하였습니다. 만약 변경사항이 없으면 통신하지 않습니다.<br>
+  - 화면을 이동해도 새로고침이 일어나지 않도록 구현하였습니다. (사용자가 새로고침하면 새로고침 수행)<br>
+  - 동영상 녹화 시 용량을 제한하였습니다. 이미지분석 성능이 저하되지 않는 선에서 동영상 화질을 낮춰서 업로드하여 녹화시간을 늘렸습니다.
+    </details>
 <br>
 
 ## 프로젝트를 마치며
