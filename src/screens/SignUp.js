@@ -74,7 +74,7 @@ export default function SignIn() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.signUpText}>Sign Up!</Text>
+      <Text style={styles.signUpText}>Sign Up</Text>
       <View style={styles.viewMargin}>
         <TextInput
           placeholder="Email"
@@ -124,9 +124,10 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   signUpText: {
-    color: colors.foreground,
-    fontSize: 24,
     marginBottom: 20,
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: colors.foreground,
   },
   viewMargin: {
     marginTop: 20,
