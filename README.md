@@ -24,12 +24,25 @@ SmartFit은 혼자서 운동하더라도 정확한 자세로 운동할 수 있�
 - [프로젝트를 마치며](#프로젝트를-마치며)
 
 ## 🔗 배포 & 링크
+<details><summary>설치 QR코드</summary>
+
+![chrome_qrcode_1658496422902](https://user-images.githubusercontent.com/102529818/180452391-bcd70eaf-e772-43ba-826b-d4ec26d085dc.png)
+
+  </details>
 
 - [안드로이드 설치파일 링크](https://drive.google.com/file/d/1pcRRX8W0DgumB0mbrOlXS59R5HlHtXdZ/view?usp=sharing)
 - [React-Native Repo](https://github.com/JinkwonHeo/smartfit-rn)
 - [Backend Repo](https://github.com/JinkwonHeo/smartfit-server)
 
 ## 설치방법
+### **현재는 안드로이드 운영체제에서만 구동이 가능합니다!**
+- QR코드를 이용한 설치방법
+1. 휴대폰의 카메라 앱을 켠 후 QR코드를 인식합니다.
+2. 인식이 완료되면 나타나는 창에서 주소를 누릅니다.
+3. 계정 선택 후 SmartFit을 설치합니다.
+    1. *설치 시 구글드라이브 권한설정을 요구하면 권한을 설정해주세요.*
+    2. *구글 플레이스토어에 아직 정식으로 등록되지 않은 앱이기 때문에 주의를 요하는 앱이라는 경고문이 뜰 수 있습니다. ‘무시하고 설치'를 누르시면 정상적으로 설치가 진행됩니다.*
+- smartfit_final.apk파일을 다운로드받아 설치하는 방법
 1. [안드로이드 설치파일 링크](https://drive.google.com/file/d/1pcRRX8W0DgumB0mbrOlXS59R5HlHtXdZ/view?usp=sharing)에서 smartfit_final.apk파일을 다운로드 받습니다.
 2. 다운로드 받은 smartfit_final.apk파일을 휴대폰의 '내 파일' 혹은 '파일관리자'앱에서 실행시켜 설치합니다.
 
@@ -178,10 +191,12 @@ react native를 처음 개발하려면 native환경에 맞도록 여러가지 �
   firestore는 하루에 무료로 제공되는 사용량이 있지만 이를 모두 사용하면 요금이 청구됩니다. 사용자 입장에서는 한 번의 요청이지만 어플리케이션을 서비스하는 입장에서는 여러 사용자의 요청을 처리해야 하므로 서비스비용이 매우 늘어날 수 있다는 생각이 들었습니다. 따라서 사용자의 경험을 저하시키지 않으면서 통신을 최소화하여 서비스 품질과 비용을 모두 잡을 수 있도록 하였습니다. <br>
 
  <details><summary>통신 최소화를 위한 구현 사항</summary>
+
   - 동영상 썸네일을 추출 후 로컬(어플리케이션)에 저장하였습니다. <br>
   - 사용자 프로필 수정을 할 때 바뀐 사항에 대해서만 통신이 일어나도록 구현하였습니다. 만약 변경사항이 없으면 통신하지 않습니다.<br>
   - 화면을 이동해도 새로고침이 일어나지 않도록 구현하였습니다. (사용자가 새로고침하면 새로고침 수행)<br>
   - 동영상 녹화 시 용량을 제한하였습니다. 이미지분석 성능이 저하되지 않는 선에서 동영상 화질을 낮춰서 업로드하여 녹화시간을 늘렸습니다.
+
     </details>
 <br>
 
