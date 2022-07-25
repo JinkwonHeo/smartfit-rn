@@ -90,7 +90,7 @@ SmartFit은 혼자서 운동하더라도 정확한 자세로 운동할 수 있�
 
   </details>
 
-<details><summary>3주차 - 개발 및 테스트</summary>
+<details><summary>3주차 - 개발 및 배포</summary>
 
 - Frontend
 
@@ -162,11 +162,6 @@ https://user-images.githubusercontent.com/102529818/180385372-47c76a52-b895-4bf5
 로그인 서비스로 구글 firebase를 사용하면 구글에서 제공하는 firestore 데이터베이스와 storage를 사용하는 것이 비교적 간단하기 때문에 이번 프로젝트에서는 firebase 로그인을 사용함과 동시에 firestore storage를 사용해서 프로필사진과 동영상 등을 업로드하였습니다.
 - ***react native cli vs expo cli*** <br>
 react native를 처음 개발하려면 native환경에 맞도록 여러가지 설정을 해줘야합니다. 모바일 어플리케이션 개발 초심자에게는 설정이 쉽지않았고 3주 안에 개발을 끝마쳐야 하기 때문에 빠르게 개발을 시작할 수 있는 expo cli를 사용하였습니다.
-
-<br>
-
-### cf) 전역 상태관리 툴을 사용하지 않은 이유
-- 리액트 네이티브는 컴포넌트 간에 props전달을 많이 하지 않고 부모 컴포넌트로부터 상태를 받기 위한 drilling이 심하지 않았기 때문입니다. 따라서 리액트에서 기본적으로 제공해주는 context api 기능으로 반드시 필요한 상태만 전역적으로 관리해주었습니다. <br>
 
 <br>
 
