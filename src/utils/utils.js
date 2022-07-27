@@ -28,7 +28,6 @@ export const uploadImage = async (uri, path, fName) => {
       resolve(xhr.response);
     };
     xhr.onerror = function (e) {
-      console.log(e);
       reject(new TypeError('Network request failed'));
     };
     xhr.responseType = 'blob';
@@ -57,7 +56,6 @@ export const uploadVideo = async (uri, path, fName) => {
       resolve(xhr.response);
     };
     xhr.onerror = function (e) {
-      console.log(e);
       reject(new TypeError('Network request failed'));
     };
     xhr.responseType = 'blob';
@@ -80,6 +78,7 @@ export const uploadVideo = async (uri, path, fName) => {
 export const validateEmail = (email) => {
   const emailValidation =
     /^[0-9?A-z0-9?]+(\.)?[0-9?A-z0-9?]+@[0-9?A-z]+\.[A-z]{2}.?[A-z]{0,3}$/;
+
   return emailValidation.test(email);
 };
 
@@ -87,5 +86,6 @@ export const removeWhitespace = (text) => {
   const t1 = text.replace(/\n/g, '');
   const t2 = t1.replace(/\r/g, '');
   const t3 = t2.replace(/\s*/g, '');
+
   return t3;
 };

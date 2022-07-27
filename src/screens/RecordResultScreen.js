@@ -4,6 +4,9 @@ import { useIsFocused } from '@react-navigation/native';
 import { Video } from 'expo-av';
 import * as VideoThumbnails from 'expo-video-thumbnails';
 import { auth } from '../utils/firebase';
+import { theme } from '../../theme';
+
+const colors = theme.colors;
 
 export default function RecordResultScreen({ route, navigation }) {
   const videoRef = useRef(null);
@@ -72,7 +75,7 @@ export default function RecordResultScreen({ route, navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'black',
+    backgroundColor: colors.black,
   },
   video: {
     alignSelf: 'center',
@@ -80,23 +83,23 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   headerContainer: {
-    width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    position: 'absolute',
     top: 0,
+    width: '100%',
     marginTop: 50,
     paddingHorizontal: 10,
-    position: 'absolute',
   },
   button: {
+    justifyContent: 'center',
     paddingHorizontal: 20,
     paddingVertical: 10,
-    justifyContent: 'center',
     borderRadius: 10,
-    backgroundColor: '#FFF',
+    backgroundColor: colors.white,
   },
   next: {
-    color: 'black',
     fontSize: 15,
+    color: colors.black,
   },
 });

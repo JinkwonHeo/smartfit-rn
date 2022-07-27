@@ -11,7 +11,9 @@ import { cameraWithTensors } from '@tensorflow/tfjs-react-native';
 
 import { renderPose, poseSimilarity } from '../utils/poseUtils';
 import { CAMERA_SIZE } from '../constants/size';
+import { theme } from '../../theme';
 
+const colors = theme.colors;
 const TensorCamera = cameraWithTensors(Camera);
 
 function TrainerExerciseModePoseDetect({ poseData, setPoseScore }) {
@@ -52,7 +54,6 @@ function TrainerExerciseModePoseDetect({ poseData, setPoseScore }) {
       tf.getBackend();
 
       if (isBackendMethodReady) {
-        console.log('[+] Tensorflow Ready!');
         _isTensorReady = true;
         tf.engine().startScope();
       }
@@ -177,7 +178,7 @@ function TrainerExerciseModePoseDetect({ poseData, setPoseScore }) {
                 <MaterialIcons
                   name="flip-camera-android"
                   size={35}
-                  color={'white'}
+                  color={colors.white}
                 />
               </TouchableOpacity>
             </View>
@@ -196,31 +197,26 @@ export default TrainerExerciseModePoseDetect;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: colors.white,
   },
   camera: {
     position: 'absolute',
     width: CAMERA_SIZE.width,
     height: CAMERA_SIZE.height,
   },
-  prevButtonWrapper: {
-    flex: 0.1,
-    zIndex: 13,
-    alignSelf: 'center',
-  },
   buttonContainer: {
     position: 'absolute',
     top: 20,
     left: 5,
-    margin: 10,
     zIndex: 13,
+    margin: 10,
   },
   modelResults: {
     position: 'absolute',
+    zIndex: 12,
     width: CAMERA_SIZE.width,
     height: CAMERA_SIZE.height,
-    zIndex: 12,
   },
 });

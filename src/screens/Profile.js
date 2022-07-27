@@ -148,29 +148,25 @@ export default function Profile() {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    flex: 1,
-    paddingTop: Constants.statusBarHeight + 20,
     padding: 20,
-  },
-  profileInfoText: {
-    fontSize: 22,
-    color: colors.foreground,
+    paddingTop: Constants.statusBarHeight + 20,
   },
   profileSubtext: {
+    marginTop: 20,
     fontSize: 14,
     color: colors.text,
-    marginTop: 20,
   },
   imageWrapper: {
-    marginTop: 30,
-    borderRadius: 120,
-    width: 120,
-    height: 120,
-    backgroundColor: colors.background,
     alignItems: 'center',
     justifyContent: 'center',
+    width: 120,
+    height: 120,
+    marginTop: 30,
+    borderRadius: 120,
+    backgroundColor: colors.background,
   },
   image: {
     width: '100%',
@@ -183,13 +179,13 @@ const styles = StyleSheet.create({
     right: -10,
   },
   namePlaceholder: {
-    borderBottomColor: colors.primary,
+    width: '100%',
     marginTop: 40,
     borderBottomWidth: 2,
-    width: '100%',
+    borderBottomColor: colors.primary,
   },
   buttonWrapper: {
-    marginTop: 'auto',
     width: 80,
+    marginTop: 'auto',
   },
 });

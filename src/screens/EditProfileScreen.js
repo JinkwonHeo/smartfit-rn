@@ -166,29 +166,20 @@ export default function EditProfileScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    flex: 1,
-    paddingTop: Constants.statusBarHeight + 20,
     padding: 20,
-  },
-  profileInfoText: {
-    fontSize: 22,
-    color: colors.foreground,
-  },
-  profileSubtext: {
-    fontSize: 14,
-    color: colors.text,
-    marginTop: 20,
+    paddingTop: Constants.statusBarHeight + 20,
   },
   imageWrapper: {
-    marginTop: 30,
-    borderRadius: 120,
-    width: 120,
-    height: 120,
-    backgroundColor: colors.background,
     alignItems: 'center',
     justifyContent: 'center',
+    width: 120,
+    height: 120,
+    marginTop: 30,
+    borderRadius: 120,
+    backgroundColor: colors.background,
   },
   image: {
     width: '100%',
@@ -203,11 +194,11 @@ const styles = StyleSheet.create({
   textInput: {
     width: '90%',
     marginTop: 40,
-    borderBottomColor: colors.primary,
     borderBottomWidth: 2,
+    borderBottomColor: colors.primary,
   },
   buttonWrapper: {
-    marginTop: 'auto',
     width: 80,
+    marginTop: 'auto',
   },
 });

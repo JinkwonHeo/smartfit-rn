@@ -147,9 +147,9 @@ export default function SignIn({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    flex: 1,
     backgroundColor: colors.white,
   },
   loginComponents: {
@@ -159,17 +159,17 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: SCREEN_SIZE.height / 20,
     left: SCREEN_SIZE.width / 100,
+    zIndex: 1,
     width: 120,
     height: 120,
-    zIndex: 1,
   },
   titleImage: {
     position: 'absolute',
     right: 0,
     width: SCREEN_SIZE.width + 50,
     height: SCREEN_SIZE.height + 100,
+    backgroundColor: colors.black,
     resizeMode: 'cover',
-    backgroundColor: 'black',
   },
   viewMargin: {
     marginTop: 20,
@@ -187,18 +187,18 @@ const styles = StyleSheet.create({
   },
   passwordInputText: {
     width: 220,
+    marginTop: 10,
     paddingLeft: 5,
     borderBottomColor: colors.white,
     borderBottomWidth: 2,
-    marginTop: 10,
     color: colors.white,
   },
   signupText: {
-    textAlign: 'center',
     color: colors.white,
+    textAlign: 'center',
   },
   joinUs: {
-    textAlign: 'center',
     color: colors.primary,
+    textAlign: 'center',
   },
 });

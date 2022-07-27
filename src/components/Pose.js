@@ -1,5 +1,5 @@
-import React, { createRef, useEffect, useState } from 'react';
-import { Button, Platform, StyleSheet, View, Text } from 'react-native';
+import React, { useRef, useEffect, useState } from 'react';
+import { Platform, StyleSheet, View } from 'react-native';
 import { Camera } from 'expo-camera';
 import { MaterialIcons } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -13,7 +13,9 @@ import { cameraWithTensors } from '@tensorflow/tfjs-react-native';
 import { renderPose } from '../utils/poseUtils';
 import useBasicExercise from '../hooks/useBasicExercise';
 import { CAMERA_SIZE } from '../constants/size';
+import { theme } from '../../theme';
 
+const colors = theme.colors;
 const TensorCamera = cameraWithTensors(Camera);
 
 function Pose({ exerciseName, setPoseScore }) {
@@ -24,7 +26,7 @@ function Pose({ exerciseName, setPoseScore }) {
   const [type, setType] = useState(Camera.Constants.Type.front);
   const [pose, setPose] = useState(null);
   const [rep] = useBasicExercise(pose, exerciseName);
-  const tensorCameraRef = createRef();
+  const tensorCameraRef = useRef();
   const navigation = useNavigation();
 
   const textureDims =
@@ -51,7 +53,6 @@ function Pose({ exerciseName, setPoseScore }) {
       const isBackendMethodReady = await tf.setBackend('rn-webgl');
 
       if (isBackendMethodReady) {
-        console.log('[+] Tensorflow Ready!');
         _isTensorReady = true;
         tf.engine().startScope();
       }
@@ -112,7 +113,10 @@ function Pose({ exerciseName, setPoseScore }) {
 
       await estimatePoseNet(_tensorImage);
 
-      if (_tensorImage === undefined) return;
+      if (_tensorImage === undefined) {
+        return;
+      }
+
       _tensorImage.dispose();
       requestAnimationFrame(loop);
     };
@@ -159,7 +163,7 @@ function Pose({ exerciseName, setPoseScore }) {
                 <MaterialIcons
                   name="flip-camera-android"
                   size={30}
-                  color={'white'}
+                  color={colors.white}
                 />
               </TouchableOpacity>
             </View>
@@ -176,31 +180,26 @@ export default Pose;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: colors.white,
   },
   camera: {
     position: 'absolute',
     width: CAMERA_SIZE.width,
     height: CAMERA_SIZE.height,
   },
-  prevButtonWrapper: {
-    flex: 0.1,
-    zIndex: 13,
-    alignSelf: 'center',
-  },
   buttonContainer: {
     position: 'absolute',
     top: 20,
     left: 5,
-    margin: 10,
     zIndex: 13,
+    margin: 10,
   },
   modelResults: {
     position: 'absolute',
+    zIndex: 12,
     width: CAMERA_SIZE.width,
     height: CAMERA_SIZE.height,
-    zIndex: 12,
   },
 });

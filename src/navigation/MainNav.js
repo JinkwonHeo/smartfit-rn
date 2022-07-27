@@ -5,17 +5,19 @@ import HomeScreen from '../screens/HomeScreen';
 import Trainers from '../screens/Trainers';
 import EtcScreen from '../screens/EtcScreen';
 import RecordScreen from '../screens/RecordScreen';
+import { theme } from '../../theme';
 
+const colors = theme.colors;
 const Tab = createBottomTabNavigator();
 
 export default function MainNav() {
   return (
     <Tab.Navigator
-      barStyle={{ backgroundColor: '#ffffff' }}
+      barStyle={{ backgroundColor: colors.white }}
       initialRouteName="home"
       shifting={false}
       screenOptions={{
-        tabBarActiveTintColor: '#33ABEF',
+        tabBarActiveTintColor: colors.foreground,
         headerShown: false,
         tabBarStyle: { height: 65 },
         tabBarLabelStyle: { height: 25, fontSize: 12 },

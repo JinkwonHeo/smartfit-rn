@@ -89,7 +89,7 @@ export default function MyExerciseListScreen() {
           colors={[
             'rgba(76, 102, 159, 0.7)',
             'rgba(108, 189, 235, 0.6)',
-            '#ffffff',
+            colors.white,
           ]}
           style={styles.trainerBox}
         >
@@ -109,7 +109,7 @@ export default function MyExerciseListScreen() {
         <View style={styles.container}>
           <Modal animationType="fade" transparent={true} visible={isModal}>
             <Pressable
-              style={{ flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
+              style={{ flex: 1, backgroundColor: colors.textShadow }}
               onPress={() => setIsModal(!isModal)}
             />
             <View style={styles.centeredView}>
@@ -168,26 +168,21 @@ const styles = StyleSheet.create({
     paddingRight: 7,
   },
   trainerBox: {
-    width: '95%',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    borderWidth: 0.4,
-    borderRadius: 20,
-    borderColor: '#ece5dd',
+    width: '95%',
     margin: 10,
     padding: 15,
     paddingLeft: 40,
     paddingRight: 40,
-  },
-  profile: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
+    borderWidth: 0.4,
+    borderRadius: 20,
+    borderColor: '#ece5dd',
   },
   trainerName: {
     fontSize: 21,
-    textShadowColor: 'rgba(0, 0, 0, 0.5)',
+    textShadowColor: colors.textShadow,
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 5,
     color: colors.white,
@@ -196,40 +191,36 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: colors.white,
   },
   centeredView: {
+    justifyContent: 'center',
+    alignItems: 'center',
     position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   modalView: {
+    alignItems: 'center',
     margin: 20,
-    backgroundColor: colors.white,
-    borderRadius: 20,
     padding: 30,
     paddingHorizontal: 50,
-    alignItems: 'center',
+    borderRadius: 20,
+    backgroundColor: colors.white,
     elevation: 10,
   },
   openButton: {
-    backgroundColor: '#f194ff',
     width: 150,
-    borderRadius: 15,
     padding: 10,
     margin: 5,
+    borderRadius: 15,
+    backgroundColor: '#f194ff',
   },
   textStyle: {
-    color: colors.white,
     fontWeight: 'bold',
     textAlign: 'center',
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: 'center',
+    color: colors.white,
   },
 });

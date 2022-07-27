@@ -1,5 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text } from 'react-native';
+import { theme } from '../../theme';
+
+const colors = theme.colors;
 
 function ErrorMessage({ message }) {
   if (message.length > 1) {
@@ -7,7 +10,7 @@ function ErrorMessage({ message }) {
   }
 
   if (message.length <= 1) {
-    return null;
+    return <Text testID="noMessage"></Text>;
   }
 }
 
@@ -18,7 +21,7 @@ const styles = StyleSheet.create({
     height: 20,
     marginBottom: 10,
     lineHeight: 20,
-    color: 'red',
+    color: colors.red,
   },
 });
 

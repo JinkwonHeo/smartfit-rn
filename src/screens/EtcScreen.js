@@ -84,20 +84,20 @@ export default function EtcScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.white,
   },
   etcMenuWrapper: {
     flex: 1,
-    marginTop: 20,
     alignItems: 'center',
+    marginTop: 20,
   },
   etcMenuList: {
     justifyContent: 'center',
     width: WINDOW_SIZE.width,
     height: 60,
-    borderColor: 'rgba(0, 0, 0, 0.07)',
-    borderTopWidth: 1,
     paddingLeft: 40,
+    borderTopWidth: 1,
+    borderColor: 'rgba(0, 0, 0, 0.07)',
   },
   etcMenuListText: {
     fontSize: 18,

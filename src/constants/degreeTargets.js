@@ -1,4 +1,4 @@
-export const degreeTargets = {
+export const DEGREE_TARGETS = {
   rightElbow: [6, 8, 10],
   rightShoulder: [5, 6, 8],
   rightHip: [6, 12, 14],

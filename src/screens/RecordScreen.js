@@ -54,9 +54,7 @@ function RecordScreen({ navigation }) {
             right: imagePosition.y,
           }}
         >
-          <View
-            style={{ flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.4)' }}
-          ></View>
+          <View style={{ flex: 1, backgroundColor: colors.textShadow }}></View>
         </ImageBackground>
         <Text style={styles.recordDescription}>
           SmartFit에서는 누구나 트레이너가 될 수 있습니다
@@ -97,53 +95,38 @@ function RecordScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.white,
   },
   image: {
     width: SCREEN_SIZE.width + 100,
     height: SCREEN_SIZE.height + 100,
+    backgroundColor: colors.black,
     resizeMode: 'cover',
-    backgroundColor: 'black',
   },
   buttonWrapper: {
     position: 'absolute',
     top: SCREEN_SIZE.height - 350,
   },
   recordStartButton: {
-    backgroundColor: colors.white,
     padding: 12,
     paddingHorizontal: 20,
     borderRadius: 10,
+    backgroundColor: colors.white,
   },
   buttonText: {
     fontWeight: 'bold',
   },
   recordDescription: {
     position: 'absolute',
-    height: 200,
     width: '85%',
     bottom: SCREEN_SIZE.height / 2.3,
-    color: colors.white,
+    height: 200,
     fontSize: 31.8,
     fontWeight: 'bold',
-    textShadowColor: 'rgba(0, 0, 0, 0.5)',
-    textShadowOffset: { width: 2, height: 2 },
-    textShadowRadius: 5,
-  },
-  headerBox: {
-    top: '4%',
-    padding: 15,
-    backgroundColor: '#33ABEF',
-    zIndex: 3,
-  },
-  headerText: {
-    fontSize: 25,
-    left: 15,
-    fontWeight: 'bold',
-    textShadowColor: 'rgba(0, 0, 0, 0.5)',
-    textShadowOffset: { width: 2, height: 2 },
-    textShadowRadius: 5,
     color: colors.white,
+    textShadowColor: colors.textShadow,
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 5,
   },
 });
 

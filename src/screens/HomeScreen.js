@@ -5,6 +5,9 @@ import LoadingCircle from '../components/LoadingCircle';
 import * as VideoThumbnails from 'expo-video-thumbnails';
 import { Asset } from 'expo-asset';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { theme } from '../../theme';
+
+const colors = theme.colors;
 
 export default function HomeScreen({ navigation }) {
   const videos = [
@@ -121,13 +124,13 @@ export default function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.white,
   },
   loadingCircle: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: colors.white,
   },
   content: {
     flex: 1,
@@ -143,37 +146,37 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 20,
     left: 20,
+    zIndex: 1,
     fontSize: 26,
     fontWeight: 'bold',
     textShadowColor: 'rgba(0, 0, 0, 0.9)',
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 5,
-    color: 'white',
-    zIndex: 1,
+    color: colors.white,
   },
   image: {
     width: 380,
     height: 200,
     borderRadius: 10,
-    borderColor: 'black',
     borderWidth: 1,
+    borderColor: colors.black,
   },
   thumbNailItem: {
     marginBottom: 25,
   },
   headerBox: {
     top: '4%',
-    padding: 15,
-    backgroundColor: '#33ABEF',
     zIndex: 3,
+    padding: 15,
+    backgroundColor: colors.foreground,
   },
   headerText: {
-    fontSize: 25,
     left: 15,
     fontWeight: 'bold',
-    textShadowColor: 'rgba(0, 0, 0, 0.5)',
+    fontSize: 25,
+    textShadowColor: colors.textShadow,
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 5,
-    color: 'white',
+    color: colors.white,
   },
 });

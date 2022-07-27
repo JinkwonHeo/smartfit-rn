@@ -6,6 +6,9 @@ import { Video } from 'expo-av';
 import { StatusBar } from 'expo-status-bar';
 import Pose from '../components/Pose';
 import { PermissionState } from '../context/PermissionContext';
+import { theme } from '../../theme';
+
+const colors = theme.colors;
 
 export default function ExerciseScreen({ route }) {
   const { permissionStatus, setPermissionStatus } = PermissionState();
@@ -86,23 +89,18 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-  text: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: 'white',
-  },
   overlay: {
-    borderRadius: 30,
     position: 'absolute',
     top: 200,
     padding: 20,
     paddingVertical: 40,
+    borderRadius: 30,
     backgroundColor: 'rgba(255, 255, 255, 0.8)',
   },
   informText: {
+    paddingVertical: 3,
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
-    paddingVertical: 3,
   },
 });
