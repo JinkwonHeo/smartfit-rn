@@ -180,11 +180,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     borderColor: '#ece5dd',
   },
-  profile: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-  },
   trainerName: {
     fontSize: 21,
     textShadowColor: colors.textShadow,
@@ -227,9 +222,5 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     color: colors.white,
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: 'center',
   },
 });

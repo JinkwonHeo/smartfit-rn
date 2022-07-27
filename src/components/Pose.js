@@ -189,11 +189,6 @@ const styles = StyleSheet.create({
     width: CAMERA_SIZE.width,
     height: CAMERA_SIZE.height,
   },
-  prevButtonWrapper: {
-    flex: 0.1,
-    alignSelf: 'center',
-    zIndex: 13,
-  },
   buttonContainer: {
     position: 'absolute',
     top: 20,

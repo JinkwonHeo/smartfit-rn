@@ -156,9 +156,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 25,
   },
-  flexContainer: {
-    flex: 1,
-  },
 });
 
 export default Record;

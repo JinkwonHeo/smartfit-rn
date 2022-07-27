@@ -172,15 +172,6 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingTop: Constants.statusBarHeight + 20,
   },
-  profileInfoText: {
-    fontSize: 22,
-    color: colors.foreground,
-  },
-  profileSubtext: {
-    marginTop: 20,
-    fontSize: 14,
-    color: colors.text,
-  },
   imageWrapper: {
     alignItems: 'center',
     justifyContent: 'center',

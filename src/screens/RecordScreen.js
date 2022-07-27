@@ -128,21 +128,6 @@ const styles = StyleSheet.create({
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 5,
   },
-  headerBox: {
-    top: '4%',
-    zIndex: 3,
-    padding: 15,
-    backgroundColor: colors.foreground,
-  },
-  headerText: {
-    left: 15,
-    fontSize: 25,
-    fontWeight: 'bold',
-    textShadowColor: colors.textShadow,
-    textShadowOffset: { width: 2, height: 2 },
-    textShadowRadius: 5,
-    color: colors.white,
-  },
 });
 
 export default RecordScreen;
