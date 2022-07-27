@@ -52,7 +52,6 @@ function TrainerExerciseModePoseDetect({ poseData, setPoseScore }) {
       tf.getBackend();
 
       if (isBackendMethodReady) {
-        console.log('[+] Tensorflow Ready!');
         _isTensorReady = true;
         tf.engine().startScope();
       }

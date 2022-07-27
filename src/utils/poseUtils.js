@@ -129,8 +129,6 @@ function getPoseVector(pose) {
   let minY = Math.min(...yPos);
 
   for (let i = 0; i < xPos.length; i++) {
-    // vector.push(xPos[i] - minX);
-    // vector.push(yPos[i] - minY);
     vector.push(xPos[i]);
     vector.push(yPos[i]);
   }

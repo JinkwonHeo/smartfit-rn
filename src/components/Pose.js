@@ -1,5 +1,5 @@
-import React, { createRef, useEffect, useState } from 'react';
-import { Button, Platform, StyleSheet, View, Text } from 'react-native';
+import React, { useRef, useEffect, useState } from 'react';
+import { Platform, StyleSheet, View } from 'react-native';
 import { Camera } from 'expo-camera';
 import { MaterialIcons } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -24,7 +24,7 @@ function Pose({ exerciseName, setPoseScore }) {
   const [type, setType] = useState(Camera.Constants.Type.front);
   const [pose, setPose] = useState(null);
   const [rep] = useBasicExercise(pose, exerciseName);
-  const tensorCameraRef = createRef();
+  const tensorCameraRef = useRef();
   const navigation = useNavigation();
 
   const textureDims =
@@ -51,7 +51,6 @@ function Pose({ exerciseName, setPoseScore }) {
       const isBackendMethodReady = await tf.setBackend('rn-webgl');
 
       if (isBackendMethodReady) {
-        console.log('[+] Tensorflow Ready!');
         _isTensorReady = true;
         tf.engine().startScope();
       }
