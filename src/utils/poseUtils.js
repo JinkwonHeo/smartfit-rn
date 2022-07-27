@@ -1,18 +1,8 @@
 import React from 'react';
 import * as posenet from '@tensorflow-models/posenet';
 import * as svgComponents from 'react-native-svg';
-import { degreeTargets } from '../constants/degreeTargets';
+import { DEGREE_TARGETS } from '../constants/degreeTargets';
 import { CAMERA_SIZE } from '../constants/size';
-
-export const getWindowWidth = (windowSize) => {
-  let size;
-
-  if (Math.floor(windowSize.width % 4)) {
-    size = Math.floor(windowSize.width) + 4 - Math.floor(windowSize.width % 4);
-  }
-
-  return size;
-};
 
 export const renderPose = (pose, rep) => {
   const MIN_KEYPOINT_SCORE = 0.5;
@@ -79,19 +69,19 @@ export const renderPose = (pose, rep) => {
 
 export const getAngle = (poseData, targetName) => {
   if (poseData) {
-    if (poseData.keypoints[degreeTargets[targetName][1]].score > 0.3) {
+    if (poseData.keypoints[DEGREE_TARGETS[targetName][1]].score > 0.3) {
       const rad =
         Math.atan2(
-          poseData.keypoints[degreeTargets[targetName][0]].position.y -
-            poseData.keypoints[degreeTargets[targetName][1]].position.y,
-          poseData.keypoints[degreeTargets[targetName][0]].position.x -
-            poseData.keypoints[degreeTargets[targetName][1]].position.x
+          poseData.keypoints[DEGREE_TARGETS[targetName][0]].position.y -
+            poseData.keypoints[DEGREE_TARGETS[targetName][1]].position.y,
+          poseData.keypoints[DEGREE_TARGETS[targetName][0]].position.x -
+            poseData.keypoints[DEGREE_TARGETS[targetName][1]].position.x
         ) -
         Math.atan2(
-          poseData.keypoints[degreeTargets[targetName][2]].position.y -
-            poseData.keypoints[degreeTargets[targetName][1]].position.y,
-          poseData.keypoints[degreeTargets[targetName][2]].position.x -
-            poseData.keypoints[degreeTargets[targetName][1]].position.x
+          poseData.keypoints[DEGREE_TARGETS[targetName][2]].position.y -
+            poseData.keypoints[DEGREE_TARGETS[targetName][1]].position.y,
+          poseData.keypoints[DEGREE_TARGETS[targetName][2]].position.x -
+            poseData.keypoints[DEGREE_TARGETS[targetName][1]].position.x
         );
 
       const degree = Math.floor(Math.abs(rad * (180 / Math.PI)));
