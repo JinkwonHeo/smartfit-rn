@@ -123,10 +123,10 @@ const styles = StyleSheet.create({
     backgroundColor: colors.black,
   },
   bottomBarContainer: {
+    flexDirection: 'row',
     alignItems: 'center',
     position: 'absolute',
     bottom: 0,
-    flexDirection: 'row',
     marginBottom: 30,
   },
   recordButtonContainer: {
@@ -134,23 +134,23 @@ const styles = StyleSheet.create({
     marginHorizontal: 30,
   },
   recordButton: {
-    borderWidth: 8,
-    borderColor: colors.iconRed,
-    backgroundColor: colors.iconRed,
-    borderRadius: 100,
+    alignSelf: 'center',
     height: 80,
     width: 80,
-    alignSelf: 'center',
+    borderWidth: 8,
+    borderRadius: 100,
+    borderColor: colors.iconRed,
+    backgroundColor: colors.iconRed,
   },
   sideBarContainer: {
+    position: 'absolute',
     top: 60,
     left: 0,
-    position: 'absolute',
   },
   iconText: {
-    color: colors.white,
-    fontSize: 12,
     marginTop: 5,
+    fontSize: 12,
+    color: colors.white,
   },
   sideBarButton: {
     alignItems: 'center',

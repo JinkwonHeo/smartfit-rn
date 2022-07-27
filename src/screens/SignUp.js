@@ -118,9 +118,9 @@ export default function SignIn() {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    flex: 1,
     backgroundColor: colors.white,
   },
   signUpText: {
@@ -133,14 +133,14 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   emailInputText: {
+    width: 200,
     borderBottomColor: colors.primary,
     borderBottomWidth: 2,
-    width: 200,
   },
   passwordInputText: {
-    borderBottomColor: colors.primary,
-    borderBottomWidth: 2,
     width: 200,
     marginTop: 20,
+    borderBottomColor: colors.primary,
+    borderBottomWidth: 2,
   },
 });

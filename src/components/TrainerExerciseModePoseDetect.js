@@ -197,9 +197,9 @@ export default TrainerExerciseModePoseDetect;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.white,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: colors.white,
   },
   camera: {
     position: 'absolute',
@@ -208,20 +208,20 @@ const styles = StyleSheet.create({
   },
   prevButtonWrapper: {
     flex: 0.1,
-    zIndex: 13,
     alignSelf: 'center',
+    zIndex: 13,
   },
   buttonContainer: {
     position: 'absolute',
     top: 20,
     left: 5,
-    margin: 10,
     zIndex: 13,
+    margin: 10,
   },
   modelResults: {
     position: 'absolute',
+    zIndex: 12,
     width: CAMERA_SIZE.width,
     height: CAMERA_SIZE.height,
-    zIndex: 12,
   },
 });

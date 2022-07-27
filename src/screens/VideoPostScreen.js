@@ -143,9 +143,9 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   header: {
-    marginTop: 20,
-    height: '10%',
     flexDirection: 'row',
+    height: '10%',
+    marginTop: 20,
   },
   backButton: {
     flex: 1,
@@ -161,10 +161,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   mediaPreview: {
-    aspectRatio: 9 / 16,
-    backgroundColor: colors.black,
-    borderRadius: 15,
     width: '40%',
+    borderRadius: 15,
+    backgroundColor: colors.black,
+    aspectRatio: 9 / 16,
   },
   textInput: {
     width: '100%',
@@ -174,16 +174,16 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
   },
   infoContainer: {
-    margin: 20,
     flex: 1,
     flexDirection: 'column',
+    margin: 20,
     marginRight: 20,
   },
   buttonContainer: {
     alignItems: 'center',
+    position: 'absolute',
     right: 5,
     top: 40,
-    position: 'absolute',
   },
   uploadIcon: {
     marginTop: 20,

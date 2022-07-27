@@ -83,23 +83,23 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   headerContainer: {
-    width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    position: 'absolute',
     top: 0,
+    width: '100%',
     marginTop: 50,
     paddingHorizontal: 10,
-    position: 'absolute',
   },
   button: {
+    justifyContent: 'center',
     paddingHorizontal: 20,
     paddingVertical: 10,
-    justifyContent: 'center',
     borderRadius: 10,
     backgroundColor: colors.white,
   },
   next: {
-    color: colors.black,
     fontSize: 15,
+    color: colors.black,
   },
 });

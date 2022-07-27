@@ -100,17 +100,17 @@ const styles = StyleSheet.create({
     opacity: 0.5,
   },
   overlay: {
-    borderRadius: 30,
     position: 'absolute',
     top: 200,
     padding: 20,
     paddingVertical: 40,
+    borderRadius: 30,
     backgroundColor: 'rgba(255, 255, 255, 0.8)',
   },
   informText: {
+    paddingVertical: 3,
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
-    paddingVertical: 3,
   },
 });
