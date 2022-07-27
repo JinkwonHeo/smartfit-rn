@@ -1,6 +1,9 @@
 import React from 'react';
 import { View, StyleSheet, Image, FlatList } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { theme } from '../../theme';
+
+const colors = theme.colors;
 
 export default function TrainerExerciseListScreen({ route, navigation }) {
   const { videos } = route.params.item;
@@ -44,7 +47,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: colors.white,
   },
   imageWrapper: {
     justifyContent: 'center',
@@ -54,7 +57,7 @@ const styles = StyleSheet.create({
     width: 380,
     height: 200,
     borderRadius: 10,
-    borderColor: 'black',
+    borderColor: colors.black,
     borderWidth: 1,
   },
   thumbNailItem: {

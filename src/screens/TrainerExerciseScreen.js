@@ -6,6 +6,9 @@ import { Video } from 'expo-av';
 import { StatusBar } from 'expo-status-bar';
 import { PermissionState } from '../context/PermissionContext';
 import TrainerExerciseModePoseDetect from '../components/TrainerExerciseModePoseDetect';
+import { theme } from '../../theme';
+
+const colors = theme.colors;
 
 export default function TrainerExerciseScreen({ route }) {
   const { permissionStatus, setPermissionStatus } = PermissionState();
@@ -76,7 +79,7 @@ export default function TrainerExerciseScreen({ route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black',
+    backgroundColor: colors.black,
   },
   video: {
     flex: 0.989,
@@ -91,7 +94,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: 'white',
+    color: colors.white,
   },
   opacity: {
     opacity: 0.5,

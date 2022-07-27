@@ -189,13 +189,13 @@ export default function Trainers({ navigation }) {
         <LinearGradient
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
-          colors={['rgba(102, 153, 255, 0.7)', '#ffffff']}
+          colors={['rgba(102, 153, 255, 0.7)', colors.white]}
           style={styles.trainerBox}
         >
           <AntDesign
             name="star"
             size={22}
-            color={'yellow'}
+            color={colors.yellow}
             onPress={handleDisLikeTouched}
             style={styles.likedCountIcon}
           />
@@ -221,7 +221,7 @@ export default function Trainers({ navigation }) {
           <Modal animationType="fade" transparent={true} visible={isModal}>
             <StatusBar backgroundColor={'rgba(0, 0, 0, 0.7)'} animated={true} />
             <Pressable
-              style={{ flex: 1, backgroundColor: 'rgba(255, 255, 255, 1)' }}
+              style={{ flex: 1, backgroundColor: colors.white }}
               onPress={() => setIsModal(!isModal)}
             />
             <View style={styles.centeredView}>
@@ -230,7 +230,7 @@ export default function Trainers({ navigation }) {
                 style={styles.trainerSpecificPhoto}
               >
                 <LinearGradient
-                  colors={['#00000000', '#00000000', 'rgba(255, 255, 255, 1)']}
+                  colors={['#00000000', '#00000000', colors.white]}
                   style={{ height: '100%', width: '100%' }}
                 ></LinearGradient>
               </ImageBackground>
@@ -240,14 +240,14 @@ export default function Trainers({ navigation }) {
                     <AntDesign
                       name="star"
                       size={40}
-                      color={'yellow'}
+                      color={colors.yellow}
                       onPress={handleDisLikeTouched}
                     />
                   ) : (
                     <AntDesign
                       name="staro"
                       size={40}
-                      color={'yellow'}
+                      color={colors.yellow}
                       onPress={handleLikeTouched}
                     />
                   )}
@@ -308,22 +308,22 @@ export default function Trainers({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
   },
   headerBox: {
     top: '4%',
     padding: 15,
-    backgroundColor: '#33ABEF',
+    backgroundColor: colors.foreground,
     zIndex: 3,
   },
   headerText: {
     fontSize: 25,
     left: 15,
     fontWeight: 'bold',
-    textShadowColor: 'rgba(0, 0, 0, 0.5)',
+    textShadowColor: colors.textShadow,
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 5,
-    color: 'white',
+    color: colors.white,
   },
   content: {
     flex: 1,
@@ -354,7 +354,7 @@ const styles = StyleSheet.create({
     left: 65,
     fontSize: 16,
     fontWeight: 'bold',
-    color: 'yellow',
+    color: colors.yellow,
   },
   profile: {
     width: 60,
@@ -364,16 +364,16 @@ const styles = StyleSheet.create({
   trainerName: {
     fontSize: 21,
     fontWeight: 'bold',
-    textShadowColor: 'rgba(0, 0, 0, 0.5)',
+    textShadowColor: colors.textShadow,
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 5,
-    color: 'white',
+    color: colors.white,
   },
   loadingCircle: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: colors.white,
   },
   centeredView: {
     position: 'absolute',
@@ -406,7 +406,7 @@ const styles = StyleSheet.create({
     left: 30,
     fontSize: 35,
     fontWeight: 'bold',
-    textShadowColor: 'rgba(0, 0, 0, 0.5)',
+    textShadowColor: colors.textShadow,
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 5,
   },
@@ -416,7 +416,7 @@ const styles = StyleSheet.create({
     left: 30,
     fontSize: 25,
     fontWeight: 'bold',
-    textShadowColor: 'rgba(0, 0, 0, 0.5)',
+    textShadowColor: colors.textShadow,
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 5,
   },

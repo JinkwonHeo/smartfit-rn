@@ -14,6 +14,9 @@ import TrainerExerciseScreen from '../screens/TrainerExerciseScreen';
 import MyExerciseListScreen from '../screens/MyExerciseListScreen';
 import EditProfileScreen from '../screens/EditProfileScreen';
 
+import { theme } from '../../theme';
+
+const colors = theme.colors;
 const Stack = createStackNavigator();
 
 export default function Home() {
@@ -65,14 +68,14 @@ export default function Home() {
               component={TrainerExerciseListScreen}
               options={({ route }) => ({
                 title: `${route.params.item.displayName}'s exercises`,
-                headerStyle: { backgroundColor: '#33ABEF' },
+                headerStyle: { backgroundColor: colors.foreground },
                 headerTitleStyle: {
                   fontSize: 20,
                   fontWeight: 'bold',
-                  textShadowColor: 'rgba(0, 0, 0, 0.5)',
+                  textShadowColor: colors.textShadow,
                   textShadowOffset: { width: 2, height: 2 },
                   textShadowRadius: 5,
-                  color: 'white',
+                  color: colors.white,
                 },
               })}
             />
@@ -86,14 +89,14 @@ export default function Home() {
               component={EditProfileScreen}
               options={{
                 title: 'Edit profile',
-                headerStyle: { backgroundColor: '#33ABEF' },
+                headerStyle: { backgroundColor: colors.foreground },
                 headerTitleStyle: {
                   fontSize: 20,
                   fontWeight: 'bold',
-                  textShadowColor: 'rgba(0, 0, 0, 0.5)',
+                  textShadowColor: colors.textShadow,
                   textShadowOffset: { width: 2, height: 2 },
                   textShadowRadius: 5,
-                  color: 'white',
+                  color: colors.white,
                 },
               }}
             />
@@ -102,14 +105,14 @@ export default function Home() {
               component={MyExerciseListScreen}
               options={{
                 title: 'My Exercise',
-                headerStyle: { backgroundColor: '#33ABEF' },
+                headerStyle: { backgroundColor: colors.foreground },
                 headerTitleStyle: {
                   fontSize: 20,
                   fontWeight: 'bold',
-                  textShadowColor: 'rgba(0, 0, 0, 0.5)',
+                  textShadowColor: colors.textShadow,
                   textShadowOffset: { width: 2, height: 2 },
                   textShadowRadius: 5,
-                  color: 'white',
+                  color: colors.white,
                 },
               }}
             />

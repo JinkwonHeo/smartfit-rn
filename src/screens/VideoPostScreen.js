@@ -19,6 +19,9 @@ import { uploadImage, uploadVideo } from '../utils/utils';
 import { LoadingState } from '../context/LoadingContext';
 import LoadingCircle from '../components/LoadingCircle';
 import { SERVER_URL } from '@env';
+import { theme } from '../../theme';
+
+const colors = theme.colors;
 
 export default function VideoPostScreen({ route, navigation }) {
   const [exerciseTitle, setExerciseTitle] = useState('');
@@ -137,7 +140,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 40,
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
   },
   header: {
     marginTop: 20,
@@ -159,7 +162,7 @@ const styles = StyleSheet.create({
   },
   mediaPreview: {
     aspectRatio: 9 / 16,
-    backgroundColor: 'black',
+    backgroundColor: colors.black,
     borderRadius: 15,
     width: '40%',
   },
@@ -185,13 +188,13 @@ const styles = StyleSheet.create({
   uploadIcon: {
     marginTop: 20,
     fontSize: 38,
-    color: '#2196F3',
+    color: colors.foreground,
   },
   loadingCircle: {
     marginTop: 20,
     fontSize: 38,
   },
   titleErrorText: {
-    color: 'red',
+    color: colors.red,
   },
 });

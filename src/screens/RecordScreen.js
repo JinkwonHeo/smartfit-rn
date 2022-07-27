@@ -54,9 +54,7 @@ function RecordScreen({ navigation }) {
             right: imagePosition.y,
           }}
         >
-          <View
-            style={{ flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.4)' }}
-          ></View>
+          <View style={{ flex: 1, backgroundColor: colors.textShadow }}></View>
         </ImageBackground>
         <Text style={styles.recordDescription}>
           SmartFit에서는 누구나 트레이너가 될 수 있습니다
@@ -97,13 +95,13 @@ function RecordScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.white,
   },
   image: {
     width: SCREEN_SIZE.width + 100,
     height: SCREEN_SIZE.height + 100,
     resizeMode: 'cover',
-    backgroundColor: 'black',
+    backgroundColor: colors.black,
   },
   buttonWrapper: {
     position: 'absolute',
@@ -126,21 +124,21 @@ const styles = StyleSheet.create({
     color: colors.white,
     fontSize: 31.8,
     fontWeight: 'bold',
-    textShadowColor: 'rgba(0, 0, 0, 0.5)',
+    textShadowColor: colors.textShadow,
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 5,
   },
   headerBox: {
     top: '4%',
     padding: 15,
-    backgroundColor: '#33ABEF',
+    backgroundColor: colors.foreground,
     zIndex: 3,
   },
   headerText: {
     fontSize: 25,
     left: 15,
     fontWeight: 'bold',
-    textShadowColor: 'rgba(0, 0, 0, 0.5)',
+    textShadowColor: colors.textShadow,
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 5,
     color: colors.white,

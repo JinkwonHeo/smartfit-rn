@@ -11,7 +11,9 @@ import { cameraWithTensors } from '@tensorflow/tfjs-react-native';
 
 import { renderPose, poseSimilarity } from '../utils/poseUtils';
 import { CAMERA_SIZE } from '../constants/size';
+import { theme } from '../../theme';
 
+const colors = theme.colors;
 const TensorCamera = cameraWithTensors(Camera);
 
 function TrainerExerciseModePoseDetect({ poseData, setPoseScore }) {
@@ -176,7 +178,7 @@ function TrainerExerciseModePoseDetect({ poseData, setPoseScore }) {
                 <MaterialIcons
                   name="flip-camera-android"
                   size={35}
-                  color={'white'}
+                  color={colors.white}
                 />
               </TouchableOpacity>
             </View>
@@ -195,7 +197,7 @@ export default TrainerExerciseModePoseDetect;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.white,
     alignItems: 'center',
     justifyContent: 'center',
   },

@@ -89,7 +89,7 @@ export default function MyExerciseListScreen() {
           colors={[
             'rgba(76, 102, 159, 0.7)',
             'rgba(108, 189, 235, 0.6)',
-            '#ffffff',
+            colors.white,
           ]}
           style={styles.trainerBox}
         >
@@ -109,7 +109,7 @@ export default function MyExerciseListScreen() {
         <View style={styles.container}>
           <Modal animationType="fade" transparent={true} visible={isModal}>
             <Pressable
-              style={{ flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
+              style={{ flex: 1, backgroundColor: colors.textShadow }}
               onPress={() => setIsModal(!isModal)}
             />
             <View style={styles.centeredView}>
@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
   },
   trainerName: {
     fontSize: 21,
-    textShadowColor: 'rgba(0, 0, 0, 0.5)',
+    textShadowColor: colors.textShadow,
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 5,
     color: colors.white,
@@ -196,7 +196,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: colors.white,
   },
   centeredView: {
     position: 'absolute',

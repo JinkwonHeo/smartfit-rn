@@ -67,7 +67,7 @@ function Record({ navigation }) {
     <>
       <View style={styles.container}>
         <StatusBar
-          backgroundColor={isRecording ? colors.foreground : 'red'}
+          backgroundColor={isRecording ? colors.foreground : colors.red}
           translucent
         />
         {isFocused ? (
@@ -79,7 +79,7 @@ function Record({ navigation }) {
             onCameraReady={() => setIsCameraReady(true)}
           />
         ) : null}
-        <View style={{ flex: 1, backgroundColor: 'black' }}></View>
+        <View style={{ flex: 1, backgroundColor: colors.black }}></View>
       </View>
       <View style={styles.sideBarContainer}>
         {!isRecording ? null : (
@@ -93,7 +93,7 @@ function Record({ navigation }) {
               )
             }
           >
-            <Feather name="refresh-ccw" size={24} color={'white'} />
+            <Feather name="refresh-ccw" size={24} color={colors.white} />
             <Text style={styles.iconText}>Flip</Text>
           </TouchableOpacity>
         )}
@@ -115,12 +115,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: 40,
-    backgroundColor: 'black',
+    backgroundColor: colors.black,
   },
   camera: {
     flex: 5,
     top: 90,
-    backgroundColor: 'black',
+    backgroundColor: colors.black,
   },
   bottomBarContainer: {
     alignItems: 'center',
@@ -135,8 +135,8 @@ const styles = StyleSheet.create({
   },
   recordButton: {
     borderWidth: 8,
-    borderColor: '#ff404087',
-    backgroundColor: '#ff4040',
+    borderColor: colors.iconRed,
+    backgroundColor: colors.iconRed,
     borderRadius: 100,
     height: 80,
     width: 80,
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
   iconText: {
-    color: 'white',
+    color: colors.white,
     fontSize: 12,
     marginTop: 5,
   },
