@@ -1,10 +1,8 @@
 import React from 'react';
 import * as posenet from '@tensorflow-models/posenet';
 import * as svgComponents from 'react-native-svg';
-import { Dimensions } from 'react-native';
 import { degreeTargets } from '../constants/degreeTargets';
-
-const WINDOW_SIZE = Dimensions.get('window');
+import { CAMERA_SIZE } from '../constants/size';
 
 export const getWindowWidth = (windowSize) => {
   let size;
@@ -14,11 +12,6 @@ export const getWindowWidth = (windowSize) => {
   }
 
   return size;
-};
-
-const CAMERA_SIZE = {
-  height: getWindowWidth(WINDOW_SIZE),
-  width: getWindowWidth(WINDOW_SIZE),
 };
 
 export const renderPose = (pose, rep) => {
